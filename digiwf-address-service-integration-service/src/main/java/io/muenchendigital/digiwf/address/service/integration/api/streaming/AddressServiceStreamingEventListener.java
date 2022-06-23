@@ -11,8 +11,8 @@ import io.muenchendigital.digiwf.address.service.integration.gen.model.SuchePers
 import io.muenchendigital.digiwf.address.service.integration.gen.model.SuchePersonAntwort;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.SuchePersonerweitertAnfrage;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.SuchePersonerweitertAntwort;
+import io.muenchendigital.digiwf.address.service.integration.service.AddressenBundesweitService;
 import io.muenchendigital.digiwf.address.service.integration.service.OkEwoPersonErweitertService;
-import io.muenchendigital.digiwf.address.service.integration.service.OkEwoPersonService;
 import io.muenchendigital.digiwf.spring.cloudstream.utils.api.streaming.service.CorrelateMessageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +32,7 @@ public class AddressServiceStreamingEventListener {
 
     private final CorrelateMessageService correlateMessageService;
 
-    private final OkEwoPersonService okEwoPersonService;
+    private final AddressenBundesweitService addressenBundesweitService;
 
     private final OkEwoPersonErweitertService okEwoPersonErweitertService;
 
@@ -52,7 +52,7 @@ public class AddressServiceStreamingEventListener {
 
             Object ewoResult;
             try {
-                ewoResult = this.okEwoPersonService.getPerson(ordnungsmerkmal.getOrdnungsmerkmal());
+                ewoResult = this.addressenBundesweitService.getPerson(ordnungsmerkmal.getOrdnungsmerkmal());
             } catch (final Exception exception) {
                 ewoResult = new AddressServiceErrorDto(exception.getMessage());
             }
@@ -80,7 +80,7 @@ public class AddressServiceStreamingEventListener {
 
             Object ewoResult;
             try {
-                ewoResult = this.okEwoPersonService.searchPerson(searchPersonRequestDto.getSearchPerson());
+                ewoResult = this.addressenBundesweitService.searchPerson(searchPersonRequestDto.getSearchPerson());
             } catch (final Exception exception) {
                 ewoResult = new AddressServiceErrorDto(exception.getMessage());
             }
