@@ -12,10 +12,7 @@ import lombok.Data;
         visible = true
 )
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = OrdnungsmerkmalDto.class, name = "getPerson"),
-        @JsonSubTypes.Type(value = SearchPersonRequestDto.class, name = "searchPerson"),
-        @JsonSubTypes.Type(value = OrdnungsmerkmalDto.class, name = "getPersonErweitert"),
-        @JsonSubTypes.Type(value = SearchPersonErweitertRequestDto.class, name = "searchPersonErweitert"),
+        @JsonSubTypes.Type(value = SearchAdressenBundesweitDto.class, name = "searchAdressenBundesweit"),
 })
 public abstract class AbstractRequestDto {
 
