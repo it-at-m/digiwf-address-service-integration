@@ -39,6 +39,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: ./digiwf-okewo-integration-service
+          context: ./digiwf-address-service-integration-service
           push: true
           tags: itatm/digiwf-address-service-integration-service:${{ steps.branch-name.outputs.current_branch }}

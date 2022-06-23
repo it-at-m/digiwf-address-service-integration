@@ -74,7 +74,7 @@
       }
     },
     {
-      "label": "OK.EWO request as JSON object",
+      "label": "Address service request as JSON object",
       "type": "String",
       "value": "${request}",
       "binding": {
@@ -87,7 +87,7 @@
       }
     },
     {
-      "label": "OK.EWO response as JSON object",
+      "label": "Address service response as JSON object",
       "value": "response",
       "type": "String",
       "binding": {

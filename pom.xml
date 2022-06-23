@@ -9,7 +9,7 @@
     <name>digiwf-address-service-integration-parent</name>
     <packaging>pom</packaging>
     <description>Address service integration used by DigiWF</description>
-    <url>https://github.com/it-at-m/digiwf-ok.ewo-integration</url>
+    <url>https://github.com/it-at-m/digiwf-address-service-integration</url>
 
     <properties>
         <maven.compiler.target>11</maven.compiler.target>
@@ -203,9 +203,9 @@
     </licenses>
 
     <scm>
-        <url>https://github.com/it-at-m/digiwf-ok.ewo-integration</url>
-        <connection>scm:git:git@github.com:it-at-m/digiwf-ok.ewo-integration.git</connection>
-        <developerConnection>scm:git:git@github.com:it-at-m/digiwf-ok.ewo-integration.git</developerConnection>
+        <url>https://github.com/it-at-m/digiwf-address-service-integration</url>
+        <connection>scm:git:git@github.com:it-at-m/digiwf-address-service-integration.git</connection>
+        <developerConnection>scm:git:git@github.com:it-at-m/digiwf-address-service-integration.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 

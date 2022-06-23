@@ -8,7 +8,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/it-at-m/digiwf-ok.ewo-integration">
+  <a href="https://github.com/it-at-m/digiwf-address-service-integration">
     <img src="images/logo.png" alt="Logo" height="200">
   </a>
 
@@ -82,21 +82,21 @@ See the [open issues](#) for a full list of proposed features (and known issues)
 ## Getting started
 
 For an explanation on how to get started, please refer to
-the [quickstart doc](https://github.com/it-at-m/digiwf-ok.ewo-integration/blob/dev/docs/quickstart.md).
+the [quickstart doc](https://github.com/it-at-m/digiwf-address-service-integration/blob/dev/docs/quickstart.md).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Documentation
 
 For all further documentation, please refer to
-the [documentations doc](https://github.com/it-at-m/digiwf-ok.ewo-integration/blob/dev/docs/documentation.md).
+the [documentations doc](https://github.com/it-at-m/digiwf-address-service-integration/blob/dev/docs/documentation.md).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Architecture
 
 For a small impression of the architecture, please refer to
-the [architecture doc](https://github.com/it-at-m/digiwf-ok.ewo-integration/blob/dev/docs/architecture.md).
+the [architecture doc](https://github.com/it-at-m/digiwf-address-service-integration/blob/dev/docs/architecture.md).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

@@ -6,7 +6,7 @@ import lombok.Data;
 public class AddressServiceEventDto {
 
     /**
-     * The payload to request OK.EWO.
+     * The payload to request address service.
      */
     private AbstractRequestDto request;
 
