@@ -36,6 +36,9 @@ public class Strasse {
   @JsonProperty("strassennameKurz")
   private String strassennameKurz = null;
 
+  @JsonProperty("strassennameAbgekuerzt")
+  private String strassennameAbgekuerzt = null;
+
   @JsonProperty("geozuordnungen")
   private StrasseGeozuordnungen geozuordnungen = null;
 
@@ -96,6 +99,25 @@ public class Strasse {
     this.strassennameKurz = strassennameKurz;
   }
 
+  public Strasse strassennameAbgekuerzt(String strassennameAbgekuerzt) {
+    this.strassennameAbgekuerzt = strassennameAbgekuerzt;
+    return this;
+  }
+
+   /**
+   * Get strassennameAbgekuerzt
+   * @return strassennameAbgekuerzt
+  **/
+  @NotNull
+  @Schema(required = true, description = "")
+  public String getStrassennameAbgekuerzt() {
+    return strassennameAbgekuerzt;
+  }
+
+  public void setStrassennameAbgekuerzt(String strassennameAbgekuerzt) {
+    this.strassennameAbgekuerzt = strassennameAbgekuerzt;
+  }
+
   public Strasse geozuordnungen(StrasseGeozuordnungen geozuordnungen) {
     this.geozuordnungen = geozuordnungen;
     return this;
@@ -128,12 +150,13 @@ public class Strasse {
     return Objects.equals(this.strasseId, strasse.strasseId) &&
         Objects.equals(this.strassenname, strasse.strassenname) &&
         Objects.equals(this.strassennameKurz, strasse.strassennameKurz) &&
+        Objects.equals(this.strassennameAbgekuerzt, strasse.strassennameAbgekuerzt) &&
         Objects.equals(this.geozuordnungen, strasse.geozuordnungen);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(strasseId, strassenname, strassennameKurz, geozuordnungen);
+    return Objects.hash(strasseId, strassenname, strassennameKurz, strassennameAbgekuerzt, geozuordnungen);
   }
 
 
@@ -145,6 +168,7 @@ public class Strasse {
     sb.append("    strasseId: ").append(toIndentedString(strasseId)).append("\n");
     sb.append("    strassenname: ").append(toIndentedString(strassenname)).append("\n");
     sb.append("    strassennameKurz: ").append(toIndentedString(strassennameKurz)).append("\n");
+    sb.append("    strassennameAbgekuerzt: ").append(toIndentedString(strassennameAbgekuerzt)).append("\n");
     sb.append("    geozuordnungen: ").append(toIndentedString(geozuordnungen)).append("\n");
     sb.append("}");
     return sb.toString();

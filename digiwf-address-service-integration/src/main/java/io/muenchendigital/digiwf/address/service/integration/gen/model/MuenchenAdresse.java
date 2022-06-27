@@ -56,6 +56,9 @@ public class MuenchenAdresse {
   @JsonProperty("strassennameKurz")
   private String strassennameKurz = null;
 
+  @JsonProperty("strassennameAbgekuerzt")
+  private String strassennameAbgekuerzt = null;
+
   @JsonProperty("position")
   private Position position = null;
 
@@ -234,6 +237,25 @@ public class MuenchenAdresse {
     this.strassennameKurz = strassennameKurz;
   }
 
+  public MuenchenAdresse strassennameAbgekuerzt(String strassennameAbgekuerzt) {
+    this.strassennameAbgekuerzt = strassennameAbgekuerzt;
+    return this;
+  }
+
+   /**
+   * Get strassennameAbgekuerzt
+   * @return strassennameAbgekuerzt
+  **/
+  @NotNull
+  @Schema(required = true, description = "")
+  public String getStrassennameAbgekuerzt() {
+    return strassennameAbgekuerzt;
+  }
+
+  public void setStrassennameAbgekuerzt(String strassennameAbgekuerzt) {
+    this.strassennameAbgekuerzt = strassennameAbgekuerzt;
+  }
+
   public MuenchenAdresse position(Position position) {
     this.position = position;
     return this;
@@ -312,6 +334,7 @@ public class MuenchenAdresse {
         Objects.equals(this.strasseId, muenchenAdresse.strasseId) &&
         Objects.equals(this.strassenname, muenchenAdresse.strassenname) &&
         Objects.equals(this.strassennameKurz, muenchenAdresse.strassennameKurz) &&
+        Objects.equals(this.strassennameAbgekuerzt, muenchenAdresse.strassennameAbgekuerzt) &&
         Objects.equals(this.position, muenchenAdresse.position) &&
         Objects.equals(this.geozuordnungen, muenchenAdresse.geozuordnungen) &&
         Objects.equals(this.wirkung, muenchenAdresse.wirkung);
@@ -319,7 +342,7 @@ public class MuenchenAdresse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(adresse, adressId, buchstabe, ehemaligeAdresse, hausnummer, ortsname, strasseId, strassenname, strassennameKurz, position, geozuordnungen, wirkung);
+    return Objects.hash(adresse, adressId, buchstabe, ehemaligeAdresse, hausnummer, ortsname, strasseId, strassenname, strassennameKurz, strassennameAbgekuerzt, position, geozuordnungen, wirkung);
   }
 
 
@@ -337,6 +360,7 @@ public class MuenchenAdresse {
     sb.append("    strasseId: ").append(toIndentedString(strasseId)).append("\n");
     sb.append("    strassenname: ").append(toIndentedString(strassenname)).append("\n");
     sb.append("    strassennameKurz: ").append(toIndentedString(strassennameKurz)).append("\n");
+    sb.append("    strassennameAbgekuerzt: ").append(toIndentedString(strassennameAbgekuerzt)).append("\n");
     sb.append("    position: ").append(toIndentedString(position)).append("\n");
     sb.append("    geozuordnungen: ").append(toIndentedString(geozuordnungen)).append("\n");
     sb.append("    wirkung: ").append(toIndentedString(wirkung)).append("\n");

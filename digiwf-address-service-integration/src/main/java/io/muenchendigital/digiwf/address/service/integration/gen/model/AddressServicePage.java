@@ -35,11 +35,11 @@ public class AddressServicePage {
   @JsonProperty("totalElements")
   private Long totalElements = null;
 
-  @JsonProperty("numberOfElements")
-  private Long numberOfElements = null;
-
   @JsonProperty("totalPages")
   private Long totalPages = null;
+
+  @JsonProperty("numberOfElements")
+  private Long numberOfElements = null;
 
   public AddressServicePage size(Integer size) {
     this.size = size;
@@ -97,24 +97,6 @@ public class AddressServicePage {
     this.totalElements = totalElements;
   }
 
-  public AddressServicePage numberOfElements(Long numberOfElements) {
-    this.numberOfElements = numberOfElements;
-    return this;
-  }
-
-   /**
-   * Anzahl der Ergebnisse auf dieser Seite
-   * @return numberOfElements
-  **/
-  @Schema(description = "Anzahl der Ergebnisse auf dieser Seite")
-  public Long getNumberOfElements() {
-    return numberOfElements;
-  }
-
-  public void setNumberOfElements(Long numberOfElements) {
-    this.numberOfElements = numberOfElements;
-  }
-
   public AddressServicePage totalPages(Long totalPages) {
     this.totalPages = totalPages;
     return this;
@@ -133,6 +115,24 @@ public class AddressServicePage {
     this.totalPages = totalPages;
   }
 
+  public AddressServicePage numberOfElements(Long numberOfElements) {
+    this.numberOfElements = numberOfElements;
+    return this;
+  }
+
+   /**
+   * Anzahl der Ergebnisse auf dieser Seite
+   * @return numberOfElements
+  **/
+  @Schema(description = "Anzahl der Ergebnisse auf dieser Seite")
+  public Long getNumberOfElements() {
+    return numberOfElements;
+  }
+
+  public void setNumberOfElements(Long numberOfElements) {
+    this.numberOfElements = numberOfElements;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -146,13 +146,13 @@ public class AddressServicePage {
     return Objects.equals(this.size, addressServicePage.size) &&
         Objects.equals(this.number, addressServicePage.number) &&
         Objects.equals(this.totalElements, addressServicePage.totalElements) &&
-        Objects.equals(this.numberOfElements, addressServicePage.numberOfElements) &&
-        Objects.equals(this.totalPages, addressServicePage.totalPages);
+        Objects.equals(this.totalPages, addressServicePage.totalPages) &&
+        Objects.equals(this.numberOfElements, addressServicePage.numberOfElements);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(size, number, totalElements, numberOfElements, totalPages);
+    return Objects.hash(size, number, totalElements, totalPages, numberOfElements);
   }
 
 
@@ -164,8 +164,8 @@ public class AddressServicePage {
     sb.append("    size: ").append(toIndentedString(size)).append("\n");
     sb.append("    number: ").append(toIndentedString(number)).append("\n");
     sb.append("    totalElements: ").append(toIndentedString(totalElements)).append("\n");
-    sb.append("    numberOfElements: ").append(toIndentedString(numberOfElements)).append("\n");
     sb.append("    totalPages: ").append(toIndentedString(totalPages)).append("\n");
+    sb.append("    numberOfElements: ").append(toIndentedString(numberOfElements)).append("\n");
     sb.append("}");
     return sb.toString();
   }
