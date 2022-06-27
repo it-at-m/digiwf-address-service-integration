@@ -4,7 +4,9 @@ import io.muenchendigital.digiwf.address.service.integration.exception.AddressSe
 import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationException;
 import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationServerErrorException;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenAdresse;
+import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenAdresseResponse;
 import io.muenchendigital.digiwf.address.service.integration.model.CheckAdresseMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.ListAdressenMuenchenModel;
 import io.muenchendigital.digiwf.address.service.integration.repository.AdressenMuenchenRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +29,30 @@ public class AdressenMuenchenService {
                 checkAdresseMuenchenModel.getPlz(),
                 checkAdresseMuenchenModel.getOrtsname(),
                 checkAdresseMuenchenModel.getGemeindeschluessel()
+        );
+    }
+
+    public MuenchenAdresseResponse listAdressen(final ListAdressenMuenchenModel listAdressenMuenchenModel) throws AddressServiceIntegrationClientErrorException, AddressServiceIntegrationServerErrorException, AddressServiceIntegrationException {
+        return this.adressenMuenchenRepository.listAdressen(
+                listAdressenMuenchenModel.getBaublock(),
+                listAdressenMuenchenModel.getErhaltungssatzung(),
+                listAdressenMuenchenModel.getGemarkung(),
+                listAdressenMuenchenModel.getKaminkehrerbezirk(),
+                listAdressenMuenchenModel.getPlz(),
+                listAdressenMuenchenModel.getMittelschule(),
+                listAdressenMuenchenModel.getGrundschule(),
+                listAdressenMuenchenModel.getPolizeiinspektion(),
+                listAdressenMuenchenModel.getStimmbezirk(),
+                listAdressenMuenchenModel.getStimmkreis(),
+                listAdressenMuenchenModel.getWahlbezirk(),
+                listAdressenMuenchenModel.getWahlkreis(),
+                listAdressenMuenchenModel.getStadtbezirk(),
+                listAdressenMuenchenModel.getStadtbezirksteil(),
+                listAdressenMuenchenModel.getStadtbezirksviertel(),
+                listAdressenMuenchenModel.getSort(),
+                listAdressenMuenchenModel.getSortdir(),
+                listAdressenMuenchenModel.getPage(),
+                listAdressenMuenchenModel.getPagesize()
         );
     }
 
