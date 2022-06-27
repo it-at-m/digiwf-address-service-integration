@@ -5,12 +5,15 @@ import io.muenchendigital.digiwf.address.service.integration.exception.AddressSe
 import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationServerErrorException;
 import io.muenchendigital.digiwf.address.service.integration.gen.api.AdressenMnchenApi;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenAdresse;
+import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenAdresseResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestClientException;
+
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -20,7 +23,7 @@ public class AdressenMuenchenRepository {
     private final AdressenMnchenApi adressenMnchenApi;
 
     /**
-     * Gets a {@link MuenchenAdresse}.
+     * Checks and gets a {@link MuenchenAdresse}.
      * <p>
      * For params and return value see {@link AdressenMnchenApi#checkAdresse}.
      *
@@ -48,21 +51,89 @@ public class AdressenMuenchenRepository {
                     gemeindeschluessel
             );
         } catch (final HttpClientErrorException exception) {
-            final String message = String.format("The request to get address bundesweit failed with %s.", exception.getStatusCode());
+            final String message = String.format("The request to get address failed with %s.", exception.getStatusCode());
             log.error(exception.getMessage());
             log.error(message);
             throw new AddressServiceIntegrationClientErrorException(message, exception);
         } catch (final HttpServerErrorException exception) {
-            final String message = String.format("The request to get address bundesweit failed with %s.", exception.getStatusCode());
+            final String message = String.format("The request to get address failed with %s.", exception.getStatusCode());
             log.error(exception.getMessage());
             log.error(message);
             throw new AddressServiceIntegrationServerErrorException(message, exception);
         } catch (final RestClientException exception) {
-            final String message = String.format("The request to get address bundesweit failed.");
+            final String message = String.format("The request to get address failed.");
             log.error(exception.getMessage());
             log.error(message);
             throw new AddressServiceIntegrationException(message, exception);
         }
     }
-    
+
+    /**
+     * Gets {@link MuenchenAdresseResponse}.
+     * <p>
+     * For params and return value see {@link AdressenMnchenApi#listAdressen}.
+     *
+     * @throws AddressServiceIntegrationClientErrorException if the problem is with the client.
+     * @throws AddressServiceIntegrationServerErrorException if the problem is with address service.
+     * @throws AddressServiceIntegrationException            if the problem cannot be assigned directly to address service or client.
+     */
+    public MuenchenAdresseResponse listAdressen(final List<String> baublock,
+                                                final List<String> erhaltungssatzung,
+                                                final List<String> gemarkung,
+                                                final List<String> kaminkehrerbezirk,
+                                                final List<String> plz,
+                                                final List<String> mittelschule,
+                                                final List<String> grundschule,
+                                                final List<String> polizeiinspektion,
+                                                final List<Long> stimmbezirk,
+                                                final List<Long> stimmkreis,
+                                                final List<Long> wahlbezirk,
+                                                final List<Long> wahlkreis,
+                                                final List<String> stadtbezirk,
+                                                final List<String> stadtbezirksteil,
+                                                final List<String> stadtbezirksviertel,
+                                                final String sort,
+                                                final String sortdir,
+                                                final Integer page,
+                                                final Integer pagesize) throws RestClientException, AddressServiceIntegrationClientErrorException, AddressServiceIntegrationServerErrorException, AddressServiceIntegrationException {
+        try {
+            return this.adressenMnchenApi.listAdressen(
+                    baublock,
+                    erhaltungssatzung,
+                    gemarkung,
+                    kaminkehrerbezirk,
+                    plz,
+                    mittelschule,
+                    grundschule,
+                    polizeiinspektion,
+                    stimmbezirk,
+                    stimmkreis,
+                    wahlbezirk,
+                    wahlkreis,
+                    stadtbezirk,
+                    stadtbezirksteil,
+                    stadtbezirksviertel,
+                    sort,
+                    sortdir,
+                    page,
+                    pagesize
+            );
+        } catch (final HttpClientErrorException exception) {
+            final String message = String.format("The request to get address failed with %s.", exception.getStatusCode());
+            log.error(exception.getMessage());
+            log.error(message);
+            throw new AddressServiceIntegrationClientErrorException(message, exception);
+        } catch (final HttpServerErrorException exception) {
+            final String message = String.format("The request to get address failed with %s.", exception.getStatusCode());
+            log.error(exception.getMessage());
+            log.error(message);
+            throw new AddressServiceIntegrationServerErrorException(message, exception);
+        } catch (final RestClientException exception) {
+            final String message = String.format("The request to get address failed.");
+            log.error(exception.getMessage());
+            log.error(message);
+            throw new AddressServiceIntegrationException(message, exception);
+        }
+    }
+
 }
