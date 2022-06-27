@@ -20,7 +20,7 @@
     },
     {
       "url": "https://address-service.muenchen.de/",
-      "description": "EAI-Route Prod (Erreichbar aus Datacenter) - noch nicht verfügbar"
+      "description": "EAI-Route Prod (Erreichbar aus Datacenter)"
     }
   ],
   "tags": [
@@ -2252,6 +2252,7 @@
         "required": [
           "strasseId",
           "strassenname",
+          "strassennameAbgekuerzt",
           "strassennameKurz"
         ],
         "type": "object",
@@ -2264,6 +2265,9 @@
             "type": "string"
           },
           "strassennameKurz": {
+            "type": "string"
+          },
+          "strassennameAbgekuerzt": {
             "type": "string"
           },
           "geozuordnungen": {
@@ -2314,14 +2318,14 @@
             "description": "Gesamtanzahl aller verfügbaren Ergebnisse",
             "format": "int64"
           },
-          "numberOfElements": {
-            "type": "integer",
-            "description": "Anzahl der Ergebnisse auf dieser Seite",
-            "format": "int64"
-          },
           "totalPages": {
             "type": "integer",
             "description": "Gesamtanzahl der Seiten",
+            "format": "int64"
+          },
+          "numberOfElements": {
+            "type": "integer",
+            "description": "Anzahl der Ergebnisse auf dieser Seite",
             "format": "int64"
           }
         },
@@ -2507,6 +2511,7 @@
           "position",
           "strasseId",
           "strassenname",
+          "strassennameAbgekuerzt",
           "strassennameKurz",
           "wirkung"
         ],
@@ -2538,6 +2543,9 @@
             "type": "string"
           },
           "strassennameKurz": {
+            "type": "string"
+          },
+          "strassennameAbgekuerzt": {
             "type": "string"
           },
           "position": {
