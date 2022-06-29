@@ -1,6 +1,10 @@
 package io.muenchendigital.digiwf.address.service.integration.repository;
 
+import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationClientErrorException;
+import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationException;
+import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationServerErrorException;
 import io.muenchendigital.digiwf.address.service.integration.gen.api.AdressenBundesweitApi;
+import io.muenchendigital.digiwf.address.service.integration.gen.model.BundesweiteAdresseResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,6 +13,11 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+
+import java.util.List;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -26,7 +35,71 @@ class AdressenBundesweitRepositoryTest {
     }
 
     @Test
-    void searchAdressen() {
+    void searchAdressen() throws AddressServiceIntegrationServerErrorException, AddressServiceIntegrationException, AddressServiceIntegrationClientErrorException {
+        final String query = "query";
+        final String plz = "plz";
+        final String ortsname = "ortsname";
+        final String gemeindeschluessel = "gemeindeschluessel";
+        final List<Long> hausnummerfilter = List.of(1L);
+        final List<String> buchstabefilter = List.of("buchstabefilter");
+        final String sort = "sort";
+        final String sortdir = "sortdir";
+        final Integer page = 2;
+        final Integer pagesize = 3;
+
+        Mockito.when(this.adressenBundesweitApi.searchAdressen(
+                query,
+                plz,
+                ortsname,
+                gemeindeschluessel,
+                hausnummerfilter,
+                buchstabefilter,
+                sort,
+                sortdir,
+                page,
+                pagesize)).thenReturn(new BundesweiteAdresseResponse());
+
+        final BundesweiteAdresseResponse result = this.adressenBundesweitRepository.searchAdressen(
+                query,
+                plz,
+                ortsname,
+                gemeindeschluessel,
+                hausnummerfilter,
+                buchstabefilter,
+                sort,
+                sortdir,
+                page,
+                pagesize
+        );
+
+        assertThat(result, is(new BundesweiteAdresseResponse()));
+
+        Mockito.verify(this.adressenBundesweitApi, Mockito.times(1)).searchAdressen(
+                query,
+                plz,
+                ortsname,
+                gemeindeschluessel,
+                hausnummerfilter,
+                buchstabefilter,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+    }
+
+    @Test
+    void searchAdressenException() throws AddressServiceIntegrationServerErrorException, AddressServiceIntegrationException, AddressServiceIntegrationClientErrorException {
+        final String query = "query";
+        final String plz = "plz";
+        final String ortsname = "ortsname";
+        final String gemeindeschluessel = "gemeindeschluessel";
+        final List<Long> hausnummerfilter = List.of(1L);
+        final List<String> buchstabefilter = List.of("buchstabefilter");
+        final String sort = "sort";
+        final String sortdir = "sortdir";
+        final Integer page = 2;
+        final Integer pagesize = 3;
+
 
     }
 

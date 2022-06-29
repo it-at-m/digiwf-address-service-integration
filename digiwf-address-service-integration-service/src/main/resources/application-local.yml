@@ -3,9 +3,8 @@ io:
     digiwf:
       address:
         service:
-          password: ''
           url: ''
-          username: ''
+
 spring:
   cloud:
     function:
