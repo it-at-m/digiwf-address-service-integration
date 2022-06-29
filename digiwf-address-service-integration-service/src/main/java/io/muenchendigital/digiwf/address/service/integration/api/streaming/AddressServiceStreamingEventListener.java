@@ -5,6 +5,7 @@ import io.muenchendigital.digiwf.address.service.integration.api.dto.request.Che
 import io.muenchendigital.digiwf.address.service.integration.api.dto.request.ListAdressenMuenchenDto;
 import io.muenchendigital.digiwf.address.service.integration.api.dto.request.ListAenderungenMuenchenDto;
 import io.muenchendigital.digiwf.address.service.integration.api.dto.request.SearchAdressenBundesweitDto;
+import io.muenchendigital.digiwf.address.service.integration.api.dto.request.SearchAdressenMuenchenDto;
 import io.muenchendigital.digiwf.address.service.integration.api.dto.response.AddressServiceErrorDto;
 import io.muenchendigital.digiwf.address.service.integration.api.mapper.AddressServiceMapper;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.AenderungResponse;
@@ -15,6 +16,7 @@ import io.muenchendigital.digiwf.address.service.integration.model.CheckAdresseM
 import io.muenchendigital.digiwf.address.service.integration.model.ListAdressenMuenchenModel;
 import io.muenchendigital.digiwf.address.service.integration.model.ListAenderungenMuenchenModel;
 import io.muenchendigital.digiwf.address.service.integration.model.SearchAdressenBundesweitModel;
+import io.muenchendigital.digiwf.address.service.integration.model.SearchAdressenMuenchenModel;
 import io.muenchendigital.digiwf.address.service.integration.service.AddressenBundesweitService;
 import io.muenchendigital.digiwf.address.service.integration.service.AdressenMuenchenService;
 import io.muenchendigital.digiwf.spring.cloudstream.utils.api.streaming.service.CorrelateMessageService;
@@ -141,12 +143,41 @@ public class AddressServiceStreamingEventListener {
         return message -> {
             log.debug(message.toString());
 
-            final var listAdressenMuenchen = (ListAenderungenMuenchenDto) message.getPayload().getRequest();
+            final var listAenderungenMuenchen = (ListAenderungenMuenchenDto) message.getPayload().getRequest();
 
             Object addressServiceResult;
             try {
-                final ListAenderungenMuenchenModel model = this.addressServiceMapper.dto2Model(listAdressenMuenchen);
+                final ListAenderungenMuenchenModel model = this.addressServiceMapper.dto2Model(listAenderungenMuenchen);
                 addressServiceResult = this.adressenMuenchenService.listAenderungen(model);
+            } catch (final Exception exception) {
+                addressServiceResult = new AddressServiceErrorDto(exception.getMessage());
+            }
+
+            this.correlateMessageService.sendCorrelateMessage(
+                    message.getHeaders(),
+                    Map.of(RESPONSE, addressServiceResult)
+            );
+        };
+    }
+
+    /**
+     * The Consumer expects an {@link AddressServiceEventDto} which represents an {@link SearchAdressenMuenchenDto}.
+     * <p>
+     * After successfully requesting the address service a JSON representing a {@link MuenchenAdresseResponse} is returned.
+     * <p>
+     * In case of an error the error message is returned as a JSON representing {@link AddressServiceErrorDto}.
+     */
+    @Bean
+    public Consumer<Message<AddressServiceEventDto>> searchAdressenMuenchen() {
+        return message -> {
+            log.debug(message.toString());
+
+            final var searchAdressenMuenchen = (SearchAdressenMuenchenDto) message.getPayload().getRequest();
+
+            Object addressServiceResult;
+            try {
+                final SearchAdressenMuenchenModel model = this.addressServiceMapper.dto2Model(searchAdressenMuenchen);
+                addressServiceResult = this.adressenMuenchenService.searchAdressen(model);
             } catch (final Exception exception) {
                 addressServiceResult = new AddressServiceErrorDto(exception.getMessage());
             }

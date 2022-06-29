@@ -187,4 +187,43 @@ public class AdressenMuenchenRepository {
         }
     }
 
+    public MuenchenAdresseResponse searchAdressen(final String query,
+                                                  final List<String> plzfilter,
+                                                  final List<Long> hausnummerfilter,
+                                                  final List<String> buchstabefilter,
+                                                  final String searchtype,
+                                                  final String sort,
+                                                  final String sortdir,
+                                                  final Integer page,
+                                                  final Integer pagesize) throws AddressServiceIntegrationClientErrorException, AddressServiceIntegrationServerErrorException, AddressServiceIntegrationException {
+        try {
+            return this.adressenMnchenApi.searchAdressen1(
+                    query,
+                    plzfilter,
+                    hausnummerfilter,
+                    buchstabefilter,
+                    searchtype,
+                    sort,
+                    sortdir,
+                    page,
+                    pagesize
+            );
+        } catch (final HttpClientErrorException exception) {
+            final String message = String.format("The request to get address failed with %s.", exception.getStatusCode());
+            log.error(exception.getMessage());
+            log.error(message);
+            throw new AddressServiceIntegrationClientErrorException(message, exception);
+        } catch (final HttpServerErrorException exception) {
+            final String message = String.format("The request to get address failed with %s.", exception.getStatusCode());
+            log.error(exception.getMessage());
+            log.error(message);
+            throw new AddressServiceIntegrationServerErrorException(message, exception);
+        } catch (final RestClientException exception) {
+            final String message = String.format("The request to get address failed.");
+            log.error(exception.getMessage());
+            log.error(message);
+            throw new AddressServiceIntegrationException(message, exception);
+        }
+    }
+
 }

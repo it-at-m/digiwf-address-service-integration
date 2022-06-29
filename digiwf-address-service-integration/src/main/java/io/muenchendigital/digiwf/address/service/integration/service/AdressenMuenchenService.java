@@ -9,6 +9,7 @@ import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenA
 import io.muenchendigital.digiwf.address.service.integration.model.CheckAdresseMuenchenModel;
 import io.muenchendigital.digiwf.address.service.integration.model.ListAdressenMuenchenModel;
 import io.muenchendigital.digiwf.address.service.integration.model.ListAenderungenMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.SearchAdressenMuenchenModel;
 import io.muenchendigital.digiwf.address.service.integration.repository.AdressenMuenchenRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -70,6 +71,20 @@ public class AdressenMuenchenService {
                 listAenderungenMuenchenModel.getSortdir(),
                 listAenderungenMuenchenModel.getPage(),
                 listAenderungenMuenchenModel.getPagesize()
+        );
+    }
+
+    public MuenchenAdresseResponse searchAdressen(final SearchAdressenMuenchenModel searchAdressenMuenchenModel) throws AddressServiceIntegrationServerErrorException, AddressServiceIntegrationException, AddressServiceIntegrationClientErrorException {
+        return this.adressenMuenchenRepository.searchAdressen(
+                searchAdressenMuenchenModel.getQuery(),
+                searchAdressenMuenchenModel.getPlzfilter(),
+                searchAdressenMuenchenModel.getHausnummerfilter(),
+                searchAdressenMuenchenModel.getBuchstabefilter(),
+                searchAdressenMuenchenModel.getSearchtype(),
+                searchAdressenMuenchenModel.getSort(),
+                searchAdressenMuenchenModel.getSortdir(),
+                searchAdressenMuenchenModel.getPage(),
+                searchAdressenMuenchenModel.getPagesize()
         );
     }
 
