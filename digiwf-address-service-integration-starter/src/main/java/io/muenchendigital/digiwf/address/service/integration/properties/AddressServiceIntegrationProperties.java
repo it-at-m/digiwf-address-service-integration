@@ -16,10 +16,4 @@ public class AddressServiceIntegrationProperties {
     @NotBlank
     private String url;
 
-    @NotBlank
-    private String username;
-
-    @NotBlank
-    private String password;
-
 }

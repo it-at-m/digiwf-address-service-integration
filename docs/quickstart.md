@@ -27,8 +27,6 @@ implementation group: 'io.muenchendigital.digiwf', name: 'digiwf-address-service
 ```yaml
 io.muenchendigital.digiwf.address.service:
   url: <URL>
-  username: <USERNAME>
-  password: <PASSWORD>
 ```
 
 5. Use the repository beans
