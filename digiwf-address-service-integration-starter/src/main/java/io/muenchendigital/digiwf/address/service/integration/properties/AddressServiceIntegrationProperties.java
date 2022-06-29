@@ -22,7 +22,4 @@ public class AddressServiceIntegrationProperties {
     @NotBlank
     private String password;
 
-    @NotBlank
-    private String benutzerId;
-
 }

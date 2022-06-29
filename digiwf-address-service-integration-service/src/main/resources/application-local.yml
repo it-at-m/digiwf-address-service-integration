@@ -1,11 +1,11 @@
 io:
   muenchendigital:
     digiwf:
-      okewo:
-        password: ''
-        url: ''
-        username: ''
-        benutzerId: ''
+      address:
+        service:
+          password: ''
+          url: ''
+          username: ''
 spring:
   cloud:
     function:
