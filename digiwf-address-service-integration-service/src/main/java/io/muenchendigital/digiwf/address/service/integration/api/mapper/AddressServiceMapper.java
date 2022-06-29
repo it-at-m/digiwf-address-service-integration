@@ -3,9 +3,11 @@ package io.muenchendigital.digiwf.address.service.integration.api.mapper;
 import io.muenchendigital.digiwf.address.service.integration.api.configuration.MapstructConfiguration;
 import io.muenchendigital.digiwf.address.service.integration.api.dto.request.CheckAdresseMuenchenDto;
 import io.muenchendigital.digiwf.address.service.integration.api.dto.request.ListAdressenMuenchenDto;
+import io.muenchendigital.digiwf.address.service.integration.api.dto.request.ListAenderungenMuenchenDto;
 import io.muenchendigital.digiwf.address.service.integration.api.dto.request.SearchAdressenBundesweitDto;
 import io.muenchendigital.digiwf.address.service.integration.model.CheckAdresseMuenchenModel;
 import io.muenchendigital.digiwf.address.service.integration.model.ListAdressenMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.ListAenderungenMuenchenModel;
 import io.muenchendigital.digiwf.address.service.integration.model.SearchAdressenBundesweitModel;
 import org.mapstruct.Mapper;
 
@@ -17,5 +19,7 @@ public interface AddressServiceMapper {
     CheckAdresseMuenchenModel dto2Model(final CheckAdresseMuenchenDto checkAdresseMuenchenDto);
 
     ListAdressenMuenchenModel dto2Model(final ListAdressenMuenchenDto listAdressenMuenchenDto);
+
+    ListAenderungenMuenchenModel dto2Model(final ListAenderungenMuenchenDto listAenderungenMuenchenDto);
 
 }

@@ -15,6 +15,7 @@ import lombok.Data;
         @JsonSubTypes.Type(value = SearchAdressenBundesweitDto.class, name = "searchAdressenBundesweit"),
         @JsonSubTypes.Type(value = CheckAdresseMuenchenDto.class, name = "checkAdresseMuenchen"),
         @JsonSubTypes.Type(value = ListAdressenMuenchenDto.class, name = "listAdressenMuenchen"),
+        @JsonSubTypes.Type(value = ListAenderungenMuenchenDto.class, name = "listAenderungenMuenchen"),
 })
 public abstract class AbstractRequestDto {
 
