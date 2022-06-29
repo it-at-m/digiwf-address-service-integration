@@ -1,4 +1,4 @@
-package io.muenchendigital.digiwf.address.service.integration.model;
+package io.muenchendigital.digiwf.address.service.integration.model.request;
 
 import lombok.Data;
 

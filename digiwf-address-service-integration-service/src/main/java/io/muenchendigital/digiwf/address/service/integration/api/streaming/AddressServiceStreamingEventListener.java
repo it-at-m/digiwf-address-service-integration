@@ -5,18 +5,22 @@ import io.muenchendigital.digiwf.address.service.integration.api.dto.request.Che
 import io.muenchendigital.digiwf.address.service.integration.api.dto.request.ListAdressenMuenchenDto;
 import io.muenchendigital.digiwf.address.service.integration.api.dto.request.ListAenderungenMuenchenDto;
 import io.muenchendigital.digiwf.address.service.integration.api.dto.request.SearchAdressenBundesweitDto;
+import io.muenchendigital.digiwf.address.service.integration.api.dto.request.SearchAdressenGeoMuenchenDto;
 import io.muenchendigital.digiwf.address.service.integration.api.dto.request.SearchAdressenMuenchenDto;
+import io.muenchendigital.digiwf.address.service.integration.api.dto.response.AddressDistancesDto;
 import io.muenchendigital.digiwf.address.service.integration.api.dto.response.AddressServiceErrorDto;
 import io.muenchendigital.digiwf.address.service.integration.api.mapper.AddressServiceMapper;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.AenderungResponse;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.BundesweiteAdresseResponse;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenAdresse;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenAdresseResponse;
-import io.muenchendigital.digiwf.address.service.integration.model.CheckAdresseMuenchenModel;
-import io.muenchendigital.digiwf.address.service.integration.model.ListAdressenMuenchenModel;
-import io.muenchendigital.digiwf.address.service.integration.model.ListAenderungenMuenchenModel;
-import io.muenchendigital.digiwf.address.service.integration.model.SearchAdressenBundesweitModel;
-import io.muenchendigital.digiwf.address.service.integration.model.SearchAdressenMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.request.CheckAdresseMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.request.ListAdressenMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.request.ListAenderungenMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.request.SearchAdressenBundesweitModel;
+import io.muenchendigital.digiwf.address.service.integration.model.request.SearchAdressenGeoMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.request.SearchAdressenMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.response.AddressDistancesModel;
 import io.muenchendigital.digiwf.address.service.integration.service.AddressenBundesweitService;
 import io.muenchendigital.digiwf.address.service.integration.service.AdressenMuenchenService;
 import io.muenchendigital.digiwf.spring.cloudstream.utils.api.streaming.service.CorrelateMessageService;
@@ -178,6 +182,36 @@ public class AddressServiceStreamingEventListener {
             try {
                 final SearchAdressenMuenchenModel model = this.addressServiceMapper.dto2Model(searchAdressenMuenchen);
                 addressServiceResult = this.adressenMuenchenService.searchAdressen(model);
+            } catch (final Exception exception) {
+                addressServiceResult = new AddressServiceErrorDto(exception.getMessage());
+            }
+
+            this.correlateMessageService.sendCorrelateMessage(
+                    message.getHeaders(),
+                    Map.of(RESPONSE, addressServiceResult)
+            );
+        };
+    }
+
+    /**
+     * The Consumer expects an {@link AddressServiceEventDto} which represents an {@link SearchAdressenGeoMuenchenDto}.
+     * <p>
+     * After successfully requesting the address service a JSON representing a {@link AddressDistancesDto} is returned.
+     * <p>
+     * In case of an error the error message is returned as a JSON representing {@link AddressServiceErrorDto}.
+     */
+    @Bean
+    public Consumer<Message<AddressServiceEventDto>> searchAdressenGeo() {
+        return message -> {
+            log.debug(message.toString());
+
+            final var searchAdressenGeoMuenchen = (SearchAdressenGeoMuenchenDto) message.getPayload().getRequest();
+
+            Object addressServiceResult;
+            try {
+                final SearchAdressenGeoMuenchenModel requestModel = this.addressServiceMapper.dto2Model(searchAdressenGeoMuenchen);
+                final AddressDistancesModel resultModel = this.adressenMuenchenService.searchAdressenGeo(requestModel);
+                addressServiceResult = this.addressServiceMapper.model2Dto(resultModel);
             } catch (final Exception exception) {
                 addressServiceResult = new AddressServiceErrorDto(exception.getMessage());
             }

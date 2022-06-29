@@ -4,7 +4,7 @@ import io.muenchendigital.digiwf.address.service.integration.exception.AddressSe
 import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationException;
 import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationServerErrorException;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.BundesweiteAdresseResponse;
-import io.muenchendigital.digiwf.address.service.integration.model.SearchAdressenBundesweitModel;
+import io.muenchendigital.digiwf.address.service.integration.model.request.SearchAdressenBundesweitModel;
 import io.muenchendigital.digiwf.address.service.integration.repository.AdressenBundesweitRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

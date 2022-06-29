@@ -1,4 +1,4 @@
-package io.muenchendigital.digiwf.address.service.integration.model;
+package io.muenchendigital.digiwf.address.service.integration.model.request;
 
 import lombok.Data;
 
@@ -22,7 +22,7 @@ public class SearchAdressenMuenchenModel {
     private String sortdir;
 
     private Integer page;
-    
+
     private Integer pagesize;
 
 }

@@ -5,12 +5,16 @@ import io.muenchendigital.digiwf.address.service.integration.api.dto.request.Che
 import io.muenchendigital.digiwf.address.service.integration.api.dto.request.ListAdressenMuenchenDto;
 import io.muenchendigital.digiwf.address.service.integration.api.dto.request.ListAenderungenMuenchenDto;
 import io.muenchendigital.digiwf.address.service.integration.api.dto.request.SearchAdressenBundesweitDto;
+import io.muenchendigital.digiwf.address.service.integration.api.dto.request.SearchAdressenGeoMuenchenDto;
 import io.muenchendigital.digiwf.address.service.integration.api.dto.request.SearchAdressenMuenchenDto;
-import io.muenchendigital.digiwf.address.service.integration.model.CheckAdresseMuenchenModel;
-import io.muenchendigital.digiwf.address.service.integration.model.ListAdressenMuenchenModel;
-import io.muenchendigital.digiwf.address.service.integration.model.ListAenderungenMuenchenModel;
-import io.muenchendigital.digiwf.address.service.integration.model.SearchAdressenBundesweitModel;
-import io.muenchendigital.digiwf.address.service.integration.model.SearchAdressenMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.api.dto.response.AddressDistancesDto;
+import io.muenchendigital.digiwf.address.service.integration.model.request.CheckAdresseMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.request.ListAdressenMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.request.ListAenderungenMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.request.SearchAdressenBundesweitModel;
+import io.muenchendigital.digiwf.address.service.integration.model.request.SearchAdressenGeoMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.request.SearchAdressenMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.response.AddressDistancesModel;
 import org.mapstruct.Mapper;
 
 @Mapper(config = MapstructConfiguration.class)
@@ -25,5 +29,9 @@ public interface AddressServiceMapper {
     ListAenderungenMuenchenModel dto2Model(final ListAenderungenMuenchenDto listAenderungenMuenchenDto);
 
     SearchAdressenMuenchenModel dto2Model(final SearchAdressenMuenchenDto searchAdressenMuenchenDto);
+
+    SearchAdressenGeoMuenchenModel dto2Model(final SearchAdressenGeoMuenchenDto searchAdressenGeoMuenchenDto);
+
+    AddressDistancesDto model2Dto(final AddressDistancesModel addressDistancesModel);
 
 }

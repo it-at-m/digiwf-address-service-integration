@@ -3,17 +3,22 @@ package io.muenchendigital.digiwf.address.service.integration.service;
 import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationClientErrorException;
 import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationException;
 import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationServerErrorException;
+import io.muenchendigital.digiwf.address.service.integration.gen.model.AdresseDistanz;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.AenderungResponse;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenAdresse;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenAdresseResponse;
-import io.muenchendigital.digiwf.address.service.integration.model.CheckAdresseMuenchenModel;
-import io.muenchendigital.digiwf.address.service.integration.model.ListAdressenMuenchenModel;
-import io.muenchendigital.digiwf.address.service.integration.model.ListAenderungenMuenchenModel;
-import io.muenchendigital.digiwf.address.service.integration.model.SearchAdressenMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.request.CheckAdresseMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.request.ListAdressenMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.request.ListAenderungenMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.request.SearchAdressenGeoMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.request.SearchAdressenMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.response.AddressDistancesModel;
 import io.muenchendigital.digiwf.address.service.integration.repository.AdressenMuenchenRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -86,6 +91,23 @@ public class AdressenMuenchenService {
                 searchAdressenMuenchenModel.getPage(),
                 searchAdressenMuenchenModel.getPagesize()
         );
+    }
+
+    public AddressDistancesModel searchAdressenGeo(final SearchAdressenGeoMuenchenModel searchAdressenGeoMuenchenModel) throws AddressServiceIntegrationServerErrorException, AddressServiceIntegrationException, AddressServiceIntegrationClientErrorException {
+        final var addressDistancesModel = new AddressDistancesModel();
+        final List<AdresseDistanz> addressDistances = this.adressenMuenchenRepository.searchAdressenGeo(
+                searchAdressenGeoMuenchenModel.getGeometrie(),
+                searchAdressenGeoMuenchenModel.getLat(),
+                searchAdressenGeoMuenchenModel.getLng(),
+                searchAdressenGeoMuenchenModel.getDistanz(),
+                searchAdressenGeoMuenchenModel.getTopleftlat(),
+                searchAdressenGeoMuenchenModel.getTopleftlng(),
+                searchAdressenGeoMuenchenModel.getBottomrightlat(),
+                searchAdressenGeoMuenchenModel.getBottomrightlng(),
+                searchAdressenGeoMuenchenModel.getFormat()
+        );
+        addressDistancesModel.setAdresseDistances(addressDistances);
+        return addressDistancesModel;
     }
 
 }

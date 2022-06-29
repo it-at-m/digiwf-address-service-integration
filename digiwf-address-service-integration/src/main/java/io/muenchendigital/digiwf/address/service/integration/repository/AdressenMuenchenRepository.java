@@ -4,6 +4,7 @@ import io.muenchendigital.digiwf.address.service.integration.exception.AddressSe
 import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationException;
 import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationServerErrorException;
 import io.muenchendigital.digiwf.address.service.integration.gen.api.AdressenMnchenApi;
+import io.muenchendigital.digiwf.address.service.integration.gen.model.AdresseDistanz;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.AenderungResponse;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenAdresse;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenAdresseResponse;
@@ -187,6 +188,15 @@ public class AdressenMuenchenRepository {
         }
     }
 
+    /**
+     * Gets {@link MuenchenAdresseResponse}.
+     * <p>
+     * For params and return value see {@link AdressenMnchenApi#searchAdressen1}.
+     *
+     * @throws AddressServiceIntegrationClientErrorException if the problem is with the client.
+     * @throws AddressServiceIntegrationServerErrorException if the problem is with address service.
+     * @throws AddressServiceIntegrationException            if the problem cannot be assigned directly to address service or client.
+     */
     public MuenchenAdresseResponse searchAdressen(final String query,
                                                   final List<String> plzfilter,
                                                   final List<Long> hausnummerfilter,
@@ -207,6 +217,54 @@ public class AdressenMuenchenRepository {
                     sortdir,
                     page,
                     pagesize
+            );
+        } catch (final HttpClientErrorException exception) {
+            final String message = String.format("The request to get address failed with %s.", exception.getStatusCode());
+            log.error(exception.getMessage());
+            log.error(message);
+            throw new AddressServiceIntegrationClientErrorException(message, exception);
+        } catch (final HttpServerErrorException exception) {
+            final String message = String.format("The request to get address failed with %s.", exception.getStatusCode());
+            log.error(exception.getMessage());
+            log.error(message);
+            throw new AddressServiceIntegrationServerErrorException(message, exception);
+        } catch (final RestClientException exception) {
+            final String message = String.format("The request to get address failed.");
+            log.error(exception.getMessage());
+            log.error(message);
+            throw new AddressServiceIntegrationException(message, exception);
+        }
+    }
+
+    /**
+     * Gets {@link AdresseDistanz}s.
+     * <p>
+     * For params and return value see {@link AdressenMnchenApi#searchAdressenGeo}.
+     *
+     * @throws AddressServiceIntegrationClientErrorException if the problem is with the client.
+     * @throws AddressServiceIntegrationServerErrorException if the problem is with address service.
+     * @throws AddressServiceIntegrationException            if the problem cannot be assigned directly to address service or client.
+     */
+    public List<AdresseDistanz> searchAdressenGeo(final String geometrie,
+                                                  final Double lat,
+                                                  final Double lng,
+                                                  final Double distanz,
+                                                  final Double topleftlat,
+                                                  final Double topleftlng,
+                                                  final Double bottomrightlat,
+                                                  final Double bottomrightlng,
+                                                  final String format) throws AddressServiceIntegrationClientErrorException, AddressServiceIntegrationServerErrorException, AddressServiceIntegrationException {
+        try {
+            return this.adressenMnchenApi.searchAdressenGeo(
+                    geometrie,
+                    lat,
+                    lng,
+                    distanz,
+                    topleftlat,
+                    topleftlng,
+                    bottomrightlat,
+                    bottomrightlng,
+                    format
             );
         } catch (final HttpClientErrorException exception) {
             final String message = String.format("The request to get address failed with %s.", exception.getStatusCode());
