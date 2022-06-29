@@ -18,6 +18,8 @@ import lombok.Data;
         @JsonSubTypes.Type(value = ListAenderungenMuenchenDto.class, name = "listAenderungenMuenchen"),
         @JsonSubTypes.Type(value = SearchAdressenMuenchenDto.class, name = "searchAdressenMuenchen"),
         @JsonSubTypes.Type(value = SearchAdressenGeoMuenchenDto.class, name = "searchAdressenGeoMuenchen"),
+        @JsonSubTypes.Type(value = StrassenIdDto.class, name = "findStrasseByIdMuenchen"),
+        @JsonSubTypes.Type(value = ListStrassenDto.class, name = "listStrassenMuenchen"),
 })
 public abstract class AbstractRequestDto {
 
