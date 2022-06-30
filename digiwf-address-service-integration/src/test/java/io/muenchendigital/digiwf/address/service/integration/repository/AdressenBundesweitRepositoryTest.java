@@ -5,6 +5,7 @@ import io.muenchendigital.digiwf.address.service.integration.exception.AddressSe
 import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationServerErrorException;
 import io.muenchendigital.digiwf.address.service.integration.gen.api.AdressenBundesweitApi;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.BundesweiteAdresseResponse;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,6 +14,10 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.RestClientException;
 
 import java.util.List;
 
@@ -100,7 +105,104 @@ class AdressenBundesweitRepositoryTest {
         final Integer page = 2;
         final Integer pagesize = 3;
 
+        Mockito.doThrow(new HttpClientErrorException(HttpStatus.BAD_REQUEST)).when(this.adressenBundesweitApi).searchAdressen(query,
+                plz,
+                ortsname,
+                gemeindeschluessel,
+                hausnummerfilter,
+                buchstabefilter,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Assertions.assertThrows(AddressServiceIntegrationClientErrorException.class, () -> this.adressenBundesweitRepository.searchAdressen(query,
+                plz,
+                ortsname,
+                gemeindeschluessel,
+                hausnummerfilter,
+                buchstabefilter,
+                sort,
+                sortdir,
+                page,
+                pagesize)
+        );
+        Mockito.verify(this.adressenBundesweitApi, Mockito.times(1)).searchAdressen(query,
+                plz,
+                ortsname,
+                gemeindeschluessel,
+                hausnummerfilter,
+                buchstabefilter,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Mockito.reset(this.adressenBundesweitApi);
 
+        Mockito.doThrow(new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR)).when(this.adressenBundesweitApi).searchAdressen(query,
+                plz,
+                ortsname,
+                gemeindeschluessel,
+                hausnummerfilter,
+                buchstabefilter,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Assertions.assertThrows(AddressServiceIntegrationServerErrorException.class, () -> this.adressenBundesweitRepository.searchAdressen(query,
+                plz,
+                ortsname,
+                gemeindeschluessel,
+                hausnummerfilter,
+                buchstabefilter,
+                sort,
+                sortdir,
+                page,
+                pagesize)
+        );
+        Mockito.verify(this.adressenBundesweitApi, Mockito.times(1)).searchAdressen(query,
+                plz,
+                ortsname,
+                gemeindeschluessel,
+                hausnummerfilter,
+                buchstabefilter,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Mockito.reset(this.adressenBundesweitApi);
+
+        Mockito.doThrow(new RestClientException("Something happened")).when(this.adressenBundesweitApi).searchAdressen(query,
+                plz,
+                ortsname,
+                gemeindeschluessel,
+                hausnummerfilter,
+                buchstabefilter,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Assertions.assertThrows(AddressServiceIntegrationException.class, () -> this.adressenBundesweitRepository.searchAdressen(query,
+                plz,
+                ortsname,
+                gemeindeschluessel,
+                hausnummerfilter,
+                buchstabefilter,
+                sort,
+                sortdir,
+                page,
+                pagesize)
+        );
+        Mockito.verify(this.adressenBundesweitApi, Mockito.times(1)).searchAdressen(query,
+                plz,
+                ortsname,
+                gemeindeschluessel,
+                hausnummerfilter,
+                buchstabefilter,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Mockito.reset(this.adressenBundesweitApi);
     }
 
 }
