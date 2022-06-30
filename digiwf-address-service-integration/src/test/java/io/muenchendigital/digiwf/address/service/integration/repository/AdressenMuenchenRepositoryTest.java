@@ -6,7 +6,6 @@ import io.muenchendigital.digiwf.address.service.integration.exception.AddressSe
 import io.muenchendigital.digiwf.address.service.integration.gen.api.AdressenMnchenApi;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenAdresse;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenAdresseResponse;
-import io.muenchendigital.digiwf.address.service.integration.gen.model.Strasse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -253,7 +252,7 @@ class AdressenMuenchenRepositoryTest {
                 pagesize
         );
 
-        assertThat(result, is(new Strasse()));
+        assertThat(result, is(new MuenchenAdresseResponse()));
 
         Mockito.verify(this.adressenMnchenApi, Mockito.times(1)).listAdressen(
                 baublock,
