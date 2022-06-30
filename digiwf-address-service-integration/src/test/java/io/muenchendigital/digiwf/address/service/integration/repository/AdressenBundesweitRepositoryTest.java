@@ -78,7 +78,6 @@ class AdressenBundesweitRepositoryTest {
         );
 
         assertThat(result, is(new BundesweiteAdresseResponse()));
-
         Mockito.verify(this.adressenBundesweitApi, Mockito.times(1)).searchAdressen(
                 query,
                 plz,
@@ -90,6 +89,7 @@ class AdressenBundesweitRepositoryTest {
                 sortdir,
                 page,
                 pagesize);
+
     }
 
     @Test
