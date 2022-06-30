@@ -5,6 +5,8 @@ import io.muenchendigital.digiwf.address.service.integration.exception.AddressSe
 import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationServerErrorException;
 import io.muenchendigital.digiwf.address.service.integration.gen.api.AdressenMnchenApi;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenAdresse;
+import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenAdresseResponse;
+import io.muenchendigital.digiwf.address.service.integration.gen.model.Strasse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,6 +20,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestClientException;
+
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -182,5 +186,307 @@ class AdressenMuenchenRepositoryTest {
                 gemeindeschluessel);
         Mockito.reset(this.adressenMnchenApi);
     }
+
+    @Test
+    void listAdressen() throws AddressServiceIntegrationServerErrorException, AddressServiceIntegrationException, AddressServiceIntegrationClientErrorException {
+        final List<String> baublock = List.of("baublock");
+        final List<String> erhaltungssatzung = List.of("erhaltungssatzung");
+        final List<String> gemarkung = List.of("gemarkung");
+        final List<String> kaminkehrerbezirk = List.of("kaminkehrerbezirk");
+        final List<String> plz = List.of("plz");
+        final List<String> mittelschule = List.of("mittelschule");
+        final List<String> grundschule = List.of("grundschule");
+        final List<String> polizeiinspektion = List.of("polizeiinspektion");
+        final List<Long> stimmbezirk = List.of(1L);
+        final List<Long> stimmkreis = List.of(2L);
+        final List<Long> wahlbezirk = List.of(3L);
+        final List<Long> wahlkreis = List.of(4L);
+        final List<String> stadtbezirk = List.of("stadtbezirk");
+        final List<String> stadtbezirksteil = List.of("stadtbezirksteil");
+        final List<String> stadtbezirksviertel = List.of("stadtbezirksviertel");
+        final String sort = "sort";
+        final String sortdir = "sortdir";
+        final Integer page = 98;
+        final Integer pagesize = 99;
+
+        Mockito.when(this.adressenMnchenApi.listAdressen(
+                baublock,
+                erhaltungssatzung,
+                gemarkung,
+                kaminkehrerbezirk,
+                plz,
+                mittelschule,
+                grundschule,
+                polizeiinspektion,
+                stimmbezirk,
+                stimmkreis,
+                wahlbezirk,
+                wahlkreis,
+                stadtbezirk,
+                stadtbezirksteil,
+                stadtbezirksviertel,
+                sort,
+                sortdir,
+                page,
+                pagesize
+        )).thenReturn(new MuenchenAdresseResponse());
+
+        final MuenchenAdresseResponse result = this.adressenMuenchenRepository.listAdressen(
+                baublock,
+                erhaltungssatzung,
+                gemarkung,
+                kaminkehrerbezirk,
+                plz,
+                mittelschule,
+                grundschule,
+                polizeiinspektion,
+                stimmbezirk,
+                stimmkreis,
+                wahlbezirk,
+                wahlkreis,
+                stadtbezirk,
+                stadtbezirksteil,
+                stadtbezirksviertel,
+                sort,
+                sortdir,
+                page,
+                pagesize
+        );
+
+        assertThat(result, is(new Strasse()));
+
+        Mockito.verify(this.adressenMnchenApi, Mockito.times(1)).listAdressen(
+                baublock,
+                erhaltungssatzung,
+                gemarkung,
+                kaminkehrerbezirk,
+                plz,
+                mittelschule,
+                grundschule,
+                polizeiinspektion,
+                stimmbezirk,
+                stimmkreis,
+                wahlbezirk,
+                wahlkreis,
+                stadtbezirk,
+                stadtbezirksteil,
+                stadtbezirksviertel,
+                sort,
+                sortdir,
+                page,
+                pagesize
+        );
+    }
+
+    @Test
+    void listAdressenException() {
+        final List<String> baublock = List.of("baublock");
+        final List<String> erhaltungssatzung = List.of("erhaltungssatzung");
+        final List<String> gemarkung = List.of("gemarkung");
+        final List<String> kaminkehrerbezirk = List.of("kaminkehrerbezirk");
+        final List<String> plz = List.of("plz");
+        final List<String> mittelschule = List.of("mittelschule");
+        final List<String> grundschule = List.of("grundschule");
+        final List<String> polizeiinspektion = List.of("polizeiinspektion");
+        final List<Long> stimmbezirk = List.of(1L);
+        final List<Long> stimmkreis = List.of(2L);
+        final List<Long> wahlbezirk = List.of(3L);
+        final List<Long> wahlkreis = List.of(4L);
+        final List<String> stadtbezirk = List.of("stadtbezirk");
+        final List<String> stadtbezirksteil = List.of("stadtbezirksteil");
+        final List<String> stadtbezirksviertel = List.of("stadtbezirksviertel");
+        final String sort = "sort";
+        final String sortdir = "sortdir";
+        final Integer page = 98;
+        final Integer pagesize = 99;
+
+        Mockito.doThrow(new HttpClientErrorException(HttpStatus.BAD_REQUEST)).when(this.adressenMnchenApi).listAdressen(
+                baublock,
+                erhaltungssatzung,
+                gemarkung,
+                kaminkehrerbezirk,
+                plz,
+                mittelschule,
+                grundschule,
+                polizeiinspektion,
+                stimmbezirk,
+                stimmkreis,
+                wahlbezirk,
+                wahlkreis,
+                stadtbezirk,
+                stadtbezirksteil,
+                stadtbezirksviertel,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Assertions.assertThrows(AddressServiceIntegrationClientErrorException.class, () -> this.adressenMuenchenRepository.listAdressen(
+                baublock,
+                erhaltungssatzung,
+                gemarkung,
+                kaminkehrerbezirk,
+                plz,
+                mittelschule,
+                grundschule,
+                polizeiinspektion,
+                stimmbezirk,
+                stimmkreis,
+                wahlbezirk,
+                wahlkreis,
+                stadtbezirk,
+                stadtbezirksteil,
+                stadtbezirksviertel,
+                sort,
+                sortdir,
+                page,
+                pagesize)
+        );
+        Mockito.verify(this.adressenMnchenApi, Mockito.times(1)).listAdressen(baublock,
+                erhaltungssatzung,
+                gemarkung,
+                kaminkehrerbezirk,
+                plz,
+                mittelschule,
+                grundschule,
+                polizeiinspektion,
+                stimmbezirk,
+                stimmkreis,
+                wahlbezirk,
+                wahlkreis,
+                stadtbezirk,
+                stadtbezirksteil,
+                stadtbezirksviertel,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Mockito.reset(this.adressenMnchenApi);
+
+        Mockito.doThrow(new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR)).when(this.adressenMnchenApi).listAdressen(
+                baublock,
+                erhaltungssatzung,
+                gemarkung,
+                kaminkehrerbezirk,
+                plz,
+                mittelschule,
+                grundschule,
+                polizeiinspektion,
+                stimmbezirk,
+                stimmkreis,
+                wahlbezirk,
+                wahlkreis,
+                stadtbezirk,
+                stadtbezirksteil,
+                stadtbezirksviertel,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Assertions.assertThrows(AddressServiceIntegrationServerErrorException.class, () -> this.adressenMuenchenRepository.listAdressen(
+                baublock,
+                erhaltungssatzung,
+                gemarkung,
+                kaminkehrerbezirk,
+                plz,
+                mittelschule,
+                grundschule,
+                polizeiinspektion,
+                stimmbezirk,
+                stimmkreis,
+                wahlbezirk,
+                wahlkreis,
+                stadtbezirk,
+                stadtbezirksteil,
+                stadtbezirksviertel,
+                sort,
+                sortdir,
+                page,
+                pagesize)
+        );
+        Mockito.verify(this.adressenMnchenApi, Mockito.times(1)).listAdressen(
+                baublock,
+                erhaltungssatzung,
+                gemarkung,
+                kaminkehrerbezirk,
+                plz,
+                mittelschule,
+                grundschule,
+                polizeiinspektion,
+                stimmbezirk,
+                stimmkreis,
+                wahlbezirk,
+                wahlkreis,
+                stadtbezirk,
+                stadtbezirksteil,
+                stadtbezirksviertel,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Mockito.reset(this.adressenMnchenApi);
+
+        Mockito.doThrow(new RestClientException("Something happened")).when(this.adressenMnchenApi).listAdressen(baublock,
+                erhaltungssatzung,
+                gemarkung,
+                kaminkehrerbezirk,
+                plz,
+                mittelschule,
+                grundschule,
+                polizeiinspektion,
+                stimmbezirk,
+                stimmkreis,
+                wahlbezirk,
+                wahlkreis,
+                stadtbezirk,
+                stadtbezirksteil,
+                stadtbezirksviertel,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Assertions.assertThrows(AddressServiceIntegrationException.class, () -> this.adressenMuenchenRepository.listAdressen(
+                baublock,
+                erhaltungssatzung,
+                gemarkung,
+                kaminkehrerbezirk,
+                plz,
+                mittelschule,
+                grundschule,
+                polizeiinspektion,
+                stimmbezirk,
+                stimmkreis,
+                wahlbezirk,
+                wahlkreis,
+                stadtbezirk,
+                stadtbezirksteil,
+                stadtbezirksviertel,
+                sort,
+                sortdir,
+                page,
+                pagesize)
+        );
+        Mockito.verify(this.adressenMnchenApi, Mockito.times(1)).listAdressen(baublock,
+                erhaltungssatzung,
+                gemarkung,
+                kaminkehrerbezirk,
+                plz,
+                mittelschule,
+                grundschule,
+                polizeiinspektion,
+                stimmbezirk,
+                stimmkreis,
+                wahlbezirk,
+                wahlkreis,
+                stadtbezirk,
+                stadtbezirksteil,
+                stadtbezirksviertel,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Mockito.reset(this.adressenMnchenApi);
+
+    }
+
 
 }
