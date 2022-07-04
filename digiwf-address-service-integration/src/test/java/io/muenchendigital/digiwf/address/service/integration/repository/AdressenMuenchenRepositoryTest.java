@@ -655,4 +655,49 @@ class AdressenMuenchenRepositoryTest {
         Mockito.reset(this.adressenMnchenApi);
     }
 
+    @Test
+    void searchAdressen() throws AddressServiceIntegrationServerErrorException, AddressServiceIntegrationException, AddressServiceIntegrationClientErrorException {
+        final String query = "query";
+        final List<String> plzfilter = List.of("plzfilter");
+        final List<Long> hausnummerfilter = List.of(55L);
+        final List<String> buchstabefilter = List.of("buchstabefilter");
+        final String searchtype = "searchtype";
+        final String sort = "sort";
+        final String sortdir = "sortdir";
+        final Integer page = 67;
+        final Integer pagesize = 68;
+
+        Mockito.when(this.adressenMnchenApi.searchAdressen1(query,
+                plzfilter,
+                hausnummerfilter,
+                buchstabefilter,
+                searchtype,
+                sort,
+                sortdir,
+                page,
+                pagesize)).thenReturn(new MuenchenAdresseResponse());
+
+        final MuenchenAdresseResponse result = this.adressenMuenchenRepository.searchAdressen(query,
+                plzfilter,
+                hausnummerfilter,
+                buchstabefilter,
+                searchtype,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+
+        assertThat(result, is(new MuenchenAdresseResponse()));
+
+        Mockito.verify(this.adressenMnchenApi, Mockito.times(1)).searchAdressen1(query,
+                plzfilter,
+                hausnummerfilter,
+                buchstabefilter,
+                searchtype,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+    }
+
 }
