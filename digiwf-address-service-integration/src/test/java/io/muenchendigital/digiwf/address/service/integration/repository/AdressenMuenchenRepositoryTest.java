@@ -700,4 +700,114 @@ class AdressenMuenchenRepositoryTest {
                 pagesize);
     }
 
+    @Test
+    void searchAdressenException() {
+        final String query = "query";
+        final List<String> plzfilter = List.of("plzfilter");
+        final List<Long> hausnummerfilter = List.of(55L);
+        final List<String> buchstabefilter = List.of("buchstabefilter");
+        final String searchtype = "searchtype";
+        final String sort = "sort";
+        final String sortdir = "sortdir";
+        final Integer page = 67;
+        final Integer pagesize = 68;
+
+
+        Mockito.doThrow(new HttpClientErrorException(HttpStatus.BAD_REQUEST)).when(this.adressenMnchenApi).searchAdressen1(query,
+                plzfilter,
+                hausnummerfilter,
+                buchstabefilter,
+                searchtype,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Assertions.assertThrows(AddressServiceIntegrationClientErrorException.class, () -> this.adressenMuenchenRepository.searchAdressen(query,
+                plzfilter,
+                hausnummerfilter,
+                buchstabefilter,
+                searchtype,
+                sort,
+                sortdir,
+                page,
+                pagesize)
+        );
+        Mockito.verify(this.adressenMnchenApi, Mockito.times(1)).searchAdressen1(query,
+                plzfilter,
+                hausnummerfilter,
+                buchstabefilter,
+                searchtype,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Mockito.reset(this.adressenMnchenApi);
+
+        Mockito.doThrow(new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR)).when(this.adressenMnchenApi).searchAdressen1(
+                query,
+                plzfilter,
+                hausnummerfilter,
+                buchstabefilter,
+                searchtype,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Assertions.assertThrows(AddressServiceIntegrationServerErrorException.class, () -> this.adressenMuenchenRepository.searchAdressen(
+                query,
+                plzfilter,
+                hausnummerfilter,
+                buchstabefilter,
+                searchtype,
+                sort,
+                sortdir,
+                page,
+                pagesize)
+        );
+        Mockito.verify(this.adressenMnchenApi, Mockito.times(1)).searchAdressen1(
+                query,
+                plzfilter,
+                hausnummerfilter,
+                buchstabefilter,
+                searchtype,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Mockito.reset(this.adressenMnchenApi);
+
+        Mockito.doThrow(new RestClientException("Something happened")).when(this.adressenMnchenApi).searchAdressen1(
+                query,
+                plzfilter,
+                hausnummerfilter,
+                buchstabefilter,
+                searchtype,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Assertions.assertThrows(AddressServiceIntegrationException.class, () -> this.adressenMuenchenRepository.searchAdressen(
+                query,
+                plzfilter,
+                hausnummerfilter,
+                buchstabefilter,
+                searchtype,
+                sort,
+                sortdir,
+                page,
+                pagesize)
+        );
+        Mockito.verify(this.adressenMnchenApi, Mockito.times(1)).searchAdressen1(
+                query,
+                plzfilter,
+                hausnummerfilter,
+                buchstabefilter,
+                searchtype,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Mockito.reset(this.adressenMnchenApi);
+    }
+
 }
