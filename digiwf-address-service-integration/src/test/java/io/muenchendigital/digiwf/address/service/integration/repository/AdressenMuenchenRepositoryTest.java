@@ -4,6 +4,7 @@ import io.muenchendigital.digiwf.address.service.integration.exception.AddressSe
 import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationException;
 import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationServerErrorException;
 import io.muenchendigital.digiwf.address.service.integration.gen.api.AdressenMnchenApi;
+import io.muenchendigital.digiwf.address.service.integration.gen.model.AdresseDistanz;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.AenderungResponse;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenAdresse;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenAdresseResponse;
@@ -808,6 +809,71 @@ class AdressenMuenchenRepositoryTest {
                 page,
                 pagesize);
         Mockito.reset(this.adressenMnchenApi);
+    }
+
+    @Test
+    void searchAdressenGeo() throws AddressServiceIntegrationServerErrorException, AddressServiceIntegrationException, AddressServiceIntegrationClientErrorException {
+        final String geometrie = "geometrie";
+        final Double lat = 89.0;
+        final Double lng = 88.0;
+        final Double distanz = 87.0;
+        final Double topleftlat = 86.0;
+        final Double topleftlng = 85.0;
+        final Double bottomrightlat = 84.0;
+        final Double bottomrightlng = 83.0;
+        final String format = "format";
+
+        Mockito.when(this.adressenMnchenApi.searchAdressenGeo(
+                geometrie,
+                lat,
+                lng,
+                distanz,
+                topleftlat,
+                topleftlng,
+                bottomrightlat,
+                bottomrightlng,
+                format
+        )).thenReturn(List.of(new AdresseDistanz()));
+
+        final List<AdresseDistanz> result = this.adressenMuenchenRepository.searchAdressenGeo(
+                geometrie,
+                lat,
+                lng,
+                distanz,
+                topleftlat,
+                topleftlng,
+                bottomrightlat,
+                bottomrightlng,
+                format
+        );
+
+        assertThat(result, is(List.of(new AdresseDistanz())));
+
+        Mockito.verify(this.adressenMnchenApi, Mockito.times(1)).searchAdressenGeo(
+                geometrie,
+                lat,
+                lng,
+                distanz,
+                topleftlat,
+                topleftlng,
+                bottomrightlat,
+                bottomrightlng,
+                format
+        );
+    }
+
+    @Test
+    void searchAdressenGeoException() {
+        final String geometrie = "geometrie";
+        final Double lat = 89.0;
+        final Double lng = 88.0;
+        final Double distanz = 87.0;
+        final Double topleftlat = 86.0;
+        final Double topleftlng = 85.0;
+        final Double bottomrightlat = 84.0;
+        final Double bottomrightlng = 83.0;
+        final String format = "format";
+
     }
 
 }
