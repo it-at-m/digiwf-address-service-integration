@@ -4,6 +4,7 @@ import io.muenchendigital.digiwf.address.service.integration.exception.AddressSe
 import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationException;
 import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationServerErrorException;
 import io.muenchendigital.digiwf.address.service.integration.gen.api.AdressenMnchenApi;
+import io.muenchendigital.digiwf.address.service.integration.gen.model.AenderungResponse;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenAdresse;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenAdresseResponse;
 import org.junit.jupiter.api.Assertions;
@@ -484,8 +485,174 @@ class AdressenMuenchenRepositoryTest {
                 page,
                 pagesize);
         Mockito.reset(this.adressenMnchenApi);
-
     }
 
+    @Test
+    void listAenderungen() throws AddressServiceIntegrationServerErrorException, AddressServiceIntegrationException, AddressServiceIntegrationClientErrorException {
+        final String wirkungsdatumvon = "wirkungsdatumvon";
+        final String wirkungsdatumbis = "wirkungsdatumbis";
+        final String strassenname = "strassenname";
+        final Long hausnummer = 77L;
+        final String plz = "plz";
+        final String zusatz = "zusatz";
+        final String sort = "sort";
+        final String sortdir = "sortdir";
+        final Integer page = 87;
+        final Integer pagesize = 86;
+
+        Mockito.when(this.adressenMnchenApi.listAenderungen(wirkungsdatumvon,
+                wirkungsdatumbis,
+                strassenname,
+                hausnummer,
+                plz,
+                zusatz,
+                sort,
+                sortdir,
+                page,
+                pagesize)).thenReturn(new AenderungResponse());
+
+        final AenderungResponse result = this.adressenMuenchenRepository.listAenderungen(wirkungsdatumvon,
+                wirkungsdatumbis,
+                strassenname,
+                hausnummer,
+                plz,
+                zusatz,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+
+        assertThat(result, is(new AenderungResponse()));
+
+        Mockito.verify(this.adressenMnchenApi, Mockito.times(1)).listAenderungen(wirkungsdatumvon,
+                wirkungsdatumbis,
+                strassenname,
+                hausnummer,
+                plz,
+                zusatz,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+    }
+
+    @Test
+    void listAenderungenException() {
+        final String wirkungsdatumvon = "wirkungsdatumvon";
+        final String wirkungsdatumbis = "wirkungsdatumbis";
+        final String strassenname = "strassenname";
+        final Long hausnummer = 77L;
+        final String plz = "plz";
+        final String zusatz = "zusatz";
+        final String sort = "sort";
+        final String sortdir = "sortdir";
+        final Integer page = 87;
+        final Integer pagesize = 86;
+
+        Mockito.doThrow(new HttpClientErrorException(HttpStatus.BAD_REQUEST)).when(this.adressenMnchenApi).listAenderungen(
+                wirkungsdatumvon,
+                wirkungsdatumbis,
+                strassenname,
+                hausnummer,
+                plz,
+                zusatz,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Assertions.assertThrows(AddressServiceIntegrationClientErrorException.class, () -> this.adressenMuenchenRepository.listAenderungen(
+                wirkungsdatumvon,
+                wirkungsdatumbis,
+                strassenname,
+                hausnummer,
+                plz,
+                zusatz,
+                sort,
+                sortdir,
+                page,
+                pagesize)
+        );
+        Mockito.verify(this.adressenMnchenApi, Mockito.times(1)).listAenderungen(wirkungsdatumvon,
+                wirkungsdatumbis,
+                strassenname,
+                hausnummer,
+                plz,
+                zusatz,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Mockito.reset(this.adressenMnchenApi);
+
+        Mockito.doThrow(new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR)).when(this.adressenMnchenApi).listAenderungen(
+                wirkungsdatumvon,
+                wirkungsdatumbis,
+                strassenname,
+                hausnummer,
+                plz,
+                zusatz,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Assertions.assertThrows(AddressServiceIntegrationServerErrorException.class, () -> this.adressenMuenchenRepository.listAenderungen(
+                wirkungsdatumvon,
+                wirkungsdatumbis,
+                strassenname,
+                hausnummer,
+                plz,
+                zusatz,
+                sort,
+                sortdir,
+                page,
+                pagesize)
+        );
+        Mockito.verify(this.adressenMnchenApi, Mockito.times(1)).listAenderungen(
+                wirkungsdatumvon,
+                wirkungsdatumbis,
+                strassenname,
+                hausnummer,
+                plz,
+                zusatz,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Mockito.reset(this.adressenMnchenApi);
+
+        Mockito.doThrow(new RestClientException("Something happened")).when(this.adressenMnchenApi).listAenderungen(wirkungsdatumvon,
+                wirkungsdatumbis,
+                strassenname,
+                hausnummer,
+                plz,
+                zusatz,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Assertions.assertThrows(AddressServiceIntegrationException.class, () -> this.adressenMuenchenRepository.listAenderungen(
+                wirkungsdatumvon,
+                wirkungsdatumbis,
+                strassenname,
+                hausnummer,
+                plz,
+                zusatz,
+                sort,
+                sortdir,
+                page,
+                pagesize)
+        );
+        Mockito.verify(this.adressenMnchenApi, Mockito.times(1)).listAenderungen(wirkungsdatumvon,
+                wirkungsdatumbis,
+                strassenname,
+                hausnummer,
+                plz,
+                zusatz,
+                sort,
+                sortdir,
+                page,
+                pagesize);
+        Mockito.reset(this.adressenMnchenApi);
+    }
 
 }
