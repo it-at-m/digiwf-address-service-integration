@@ -874,6 +874,102 @@ class AdressenMuenchenRepositoryTest {
         final Double bottomrightlng = 83.0;
         final String format = "format";
 
+        Mockito.doThrow(new HttpClientErrorException(HttpStatus.BAD_REQUEST)).when(this.adressenMnchenApi).searchAdressenGeo(geometrie,
+                lat,
+                lng,
+                distanz,
+                topleftlat,
+                topleftlng,
+                bottomrightlat,
+                bottomrightlng,
+                format);
+        Assertions.assertThrows(AddressServiceIntegrationClientErrorException.class, () -> this.adressenMuenchenRepository.searchAdressenGeo(geometrie,
+                lat,
+                lng,
+                distanz,
+                topleftlat,
+                topleftlng,
+                bottomrightlat,
+                bottomrightlng,
+                format)
+        );
+        Mockito.verify(this.adressenMnchenApi, Mockito.times(1)).searchAdressenGeo(geometrie,
+                lat,
+                lng,
+                distanz,
+                topleftlat,
+                topleftlng,
+                bottomrightlat,
+                bottomrightlng,
+                format);
+        Mockito.reset(this.adressenMnchenApi);
+
+        Mockito.doThrow(new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR)).when(this.adressenMnchenApi).searchAdressenGeo(
+                geometrie,
+                lat,
+                lng,
+                distanz,
+                topleftlat,
+                topleftlng,
+                bottomrightlat,
+                bottomrightlng,
+                format);
+        Assertions.assertThrows(AddressServiceIntegrationServerErrorException.class, () -> this.adressenMuenchenRepository.searchAdressenGeo(
+                geometrie,
+                lat,
+                lng,
+                distanz,
+                topleftlat,
+                topleftlng,
+                bottomrightlat,
+                bottomrightlng,
+                format)
+        );
+        Mockito.verify(this.adressenMnchenApi, Mockito.times(1)).searchAdressenGeo(
+                geometrie,
+                lat,
+                lng,
+                distanz,
+                topleftlat,
+                topleftlng,
+                bottomrightlat,
+                bottomrightlng,
+                format);
+        Mockito.reset(this.adressenMnchenApi);
+
+        Mockito.doThrow(new RestClientException("Something happened")).when(this.adressenMnchenApi).searchAdressenGeo(
+                geometrie,
+                lat,
+                lng,
+                distanz,
+                topleftlat,
+                topleftlng,
+                bottomrightlat,
+                bottomrightlng,
+                format);
+        Assertions.assertThrows(AddressServiceIntegrationException.class, () -> this.adressenMuenchenRepository.searchAdressenGeo(
+                geometrie,
+                lat,
+                lng,
+                distanz,
+                topleftlat,
+                topleftlng,
+                bottomrightlat,
+                bottomrightlng,
+                format)
+        );
+        Mockito.verify(this.adressenMnchenApi, Mockito.times(1)).searchAdressenGeo(
+                geometrie,
+                lat,
+                lng,
+                distanz,
+                topleftlat,
+                topleftlng,
+                bottomrightlat,
+                bottomrightlng,
+                format);
+        Mockito.reset(this.adressenMnchenApi);
+
     }
 
 }
