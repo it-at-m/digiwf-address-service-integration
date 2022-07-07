@@ -1173,6 +1173,42 @@ The response is as follows.
 }
 ```
 
+##### findStrasseByIdMuenchen
+
+The following JSON object shows the example payload set at the element templates request field.
+
+```json
+{
+  "eventType": "findStrasseByIdMuenchen",
+  "strasseId": 1
+}
+```
+
+The response is as follows.
+
+```json
+{
+  "strasseId": 1,
+  "strassenname": "non ut",
+  "strassennameAbgekuerzt": "sed Ut fugiat",
+  "strassennameKurz": "ea exercitation",
+  "geozuordnungen": {
+    "verwaltungszuteilung": {
+      "stadtbezirke": [
+        {
+          "name": "elit minim non sit officia",
+          "nummer": -20411444
+        },
+        {
+          "name": "dolor eiusmod minim nulla",
+          "nummer": -20766720
+        }
+      ]
+    }
+  }
+}
+```
+
 #### Error handling
 
 If client-side errors, server-side errors or errors that cannot be assigned to either the client or the server occur
