@@ -3,13 +3,16 @@ package io.muenchendigital.digiwf.address.service.integration.service;
 import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationClientErrorException;
 import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationException;
 import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationServerErrorException;
+import io.muenchendigital.digiwf.address.service.integration.gen.model.AdresseDistanz;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.AenderungResponse;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenAdresse;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenAdresseResponse;
 import io.muenchendigital.digiwf.address.service.integration.model.request.CheckAdresseMuenchenModel;
 import io.muenchendigital.digiwf.address.service.integration.model.request.ListAdressenMuenchenModel;
 import io.muenchendigital.digiwf.address.service.integration.model.request.ListAenderungenMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.request.SearchAdressenGeoMuenchenModel;
 import io.muenchendigital.digiwf.address.service.integration.model.request.SearchAdressenMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.response.AddressDistancesModel;
 import io.muenchendigital.digiwf.address.service.integration.repository.AdressenMuenchenRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -237,6 +240,51 @@ class AdressenMuenchenServiceTest {
                 searchAdressenMuenchenModel.getSortdir(),
                 searchAdressenMuenchenModel.getPage(),
                 searchAdressenMuenchenModel.getPagesize()
+        );
+    }
+
+    @Test
+    void searchAdressenGeo() throws AddressServiceIntegrationServerErrorException, AddressServiceIntegrationException, AddressServiceIntegrationClientErrorException {
+        final SearchAdressenGeoMuenchenModel searchAdressenGeoMuenchenModel = new SearchAdressenGeoMuenchenModel();
+        searchAdressenGeoMuenchenModel.setGeometrie("geometrie");
+        searchAdressenGeoMuenchenModel.setLat(89.0);
+        searchAdressenGeoMuenchenModel.setLng(88.0);
+        searchAdressenGeoMuenchenModel.setDistanz(87.0);
+        searchAdressenGeoMuenchenModel.setTopleftlat(86.0);
+        searchAdressenGeoMuenchenModel.setTopleftlng(85.0);
+        searchAdressenGeoMuenchenModel.setBottomrightlat(84.0);
+        searchAdressenGeoMuenchenModel.setBottomrightlng(83.0);
+        searchAdressenGeoMuenchenModel.setFormat("format");
+
+        Mockito.when(this.adressenMuenchenRepository.searchAdressenGeo(
+                searchAdressenGeoMuenchenModel.getGeometrie(),
+                searchAdressenGeoMuenchenModel.getLat(),
+                searchAdressenGeoMuenchenModel.getLng(),
+                searchAdressenGeoMuenchenModel.getDistanz(),
+                searchAdressenGeoMuenchenModel.getTopleftlat(),
+                searchAdressenGeoMuenchenModel.getTopleftlng(),
+                searchAdressenGeoMuenchenModel.getBottomrightlat(),
+                searchAdressenGeoMuenchenModel.getBottomrightlng(),
+                searchAdressenGeoMuenchenModel.getFormat()
+        )).thenReturn(List.of(new AdresseDistanz()));
+
+        final AddressDistancesModel result = this.adressenMuenchenService.searchAdressenGeo(searchAdressenGeoMuenchenModel);
+
+        final AddressDistancesModel expected = new AddressDistancesModel();
+        expected.setAdresseDistances(List.of(new AdresseDistanz()));
+
+        assertThat(result, is(expected));
+
+        Mockito.verify(this.adressenMuenchenRepository, Mockito.times(1)).searchAdressenGeo(
+                searchAdressenGeoMuenchenModel.getGeometrie(),
+                searchAdressenGeoMuenchenModel.getLat(),
+                searchAdressenGeoMuenchenModel.getLng(),
+                searchAdressenGeoMuenchenModel.getDistanz(),
+                searchAdressenGeoMuenchenModel.getTopleftlat(),
+                searchAdressenGeoMuenchenModel.getTopleftlng(),
+                searchAdressenGeoMuenchenModel.getBottomrightlat(),
+                searchAdressenGeoMuenchenModel.getBottomrightlng(),
+                searchAdressenGeoMuenchenModel.getFormat()
         );
     }
 
