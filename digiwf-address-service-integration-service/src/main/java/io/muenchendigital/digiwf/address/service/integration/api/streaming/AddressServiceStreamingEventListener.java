@@ -27,7 +27,7 @@ import io.muenchendigital.digiwf.address.service.integration.model.request.Searc
 import io.muenchendigital.digiwf.address.service.integration.model.request.SearchAdressenMuenchenModel;
 import io.muenchendigital.digiwf.address.service.integration.model.request.StrassenIdModel;
 import io.muenchendigital.digiwf.address.service.integration.model.response.AddressDistancesModel;
-import io.muenchendigital.digiwf.address.service.integration.service.AddressenBundesweitService;
+import io.muenchendigital.digiwf.address.service.integration.service.AdressenBundesweitService;
 import io.muenchendigital.digiwf.address.service.integration.service.AdressenMuenchenService;
 import io.muenchendigital.digiwf.address.service.integration.service.StrassenMuenchenService;
 import io.muenchendigital.digiwf.spring.cloudstream.utils.api.streaming.service.CorrelateMessageService;
@@ -51,7 +51,7 @@ public class AddressServiceStreamingEventListener {
 
     private final CorrelateMessageService correlateMessageService;
 
-    private final AddressenBundesweitService addressenBundesweitService;
+    private final AdressenBundesweitService adressenBundesweitService;
 
     private final AdressenMuenchenService adressenMuenchenService;
 
@@ -74,7 +74,7 @@ public class AddressServiceStreamingEventListener {
             Object addressServiceResult;
             try {
                 final SearchAdressenBundesweitModel model = this.addressServiceMapper.dto2Model(searchAdressenBundesweit);
-                addressServiceResult = this.addressenBundesweitService.searchAdressen(model);
+                addressServiceResult = this.adressenBundesweitService.searchAdressen(model);
             } catch (final Exception exception) {
                 addressServiceResult = new AddressServiceErrorDto(exception.getMessage());
             }

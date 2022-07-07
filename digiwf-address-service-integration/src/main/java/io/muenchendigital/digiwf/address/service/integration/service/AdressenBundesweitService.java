@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class AddressenBundesweitService {
+public class AdressenBundesweitService {
 
     private final AdressenBundesweitRepository adressenBundesweitRepository;
 
