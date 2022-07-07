@@ -1209,6 +1209,84 @@ The response is as follows.
 }
 ```
 
+##### listStrassenMuenchen
+
+The following JSON object shows the example payload set at the element templates request field.
+
+```json
+{
+  "eventType": "listStrassenMuenchen",
+  "stadtbezirksnamen": "eiusmod eu",
+  "stadtbezirksnummern": -78812834,
+  "strassenname": "culpa incididunt occaecat ut",
+  "sortdir": "culpa incididunt occaecat ut",
+  "page": 0,
+  "pagesize": 20
+}
+```
+
+The response is as follows.
+
+```json
+{
+  "page": {
+    "size": 20,
+    "number": -75626395,
+    "totalElements": 92409383,
+    "totalPages": -63195915,
+    "numberOfElements": -79868306
+  },
+  "content": [
+    {
+      "score": 35150532.776935995,
+      "strasse": {
+        "strasseId": 26477179,
+        "strassenname": "ea",
+        "strassennameAbgekuerzt": "ex voluptate adipisicing",
+        "strassennameKurz": "amet irure ullamco",
+        "geozuordnungen": {
+          "verwaltungszuteilung": {
+            "stadtbezirke": [
+              {
+                "name": "ea magna dolore consectetur",
+                "nummer": -36233911
+              },
+              {
+                "name": "est fugiat qui",
+                "nummer": -81100275
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "score": 23941144.519478336,
+      "strasse": {
+        "strasseId": 4150312,
+        "strassenname": "qui",
+        "strassennameAbgekuerzt": "esse",
+        "strassennameKurz": "quis mol",
+        "geozuordnungen": {
+          "verwaltungszuteilung": {
+            "stadtbezirke": [
+              {
+                "name": "nostrud in",
+                "nummer": -11217522
+              },
+              {
+                "name": "aute Duis incididunt est nulla",
+                "nummer": 55593962
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
+```
+
 #### Error handling
 
 If client-side errors, server-side errors or errors that cannot be assigned to either the client or the server occur
