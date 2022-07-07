@@ -796,7 +796,7 @@ The following JSON object shows the example payload set at the element templates
 
 ```json
 {
-  "eventType": "listAenderungenMuenchen",
+  "eventType": "searchAdressenMuenchen",
   "query": "culpa incididunt occaecat ut",
   "plzfilter": "amet Lorem fugiat",
   "hausnummerfilter": 71564634,
@@ -1018,6 +1018,156 @@ The response is as follows.
           }
         }
       }
+    }
+  ]
+}
+```
+
+##### searchAdressenGeoMuenchen
+
+The following JSON object shows the example payload set at the element templates request field.
+
+```json
+{
+  "eventType": "searchAdressenGeoMuenchen",
+  "geometrie": "culpa incididunt occaecat ut",
+  "lat": 81856032.3170662,
+  "lng": 81856032.3170662,
+  "distanz": 81856032.3170662,
+  "topleftlat": 81856032.3170662,
+  "topleftlng": 81856032.3170662,
+  "bottomrightlat": 81856032.3170662,
+  "bottomrightlng": 81856032.3170662,
+  "format": "culpa incididunt occaecat ut"
+}
+```
+
+The response is as follows.
+
+```json
+{
+  "adresseDistances": [
+    {
+      "adresse": {
+        "adressId": "minim exercitation",
+        "adresse": "sed laboris veniam proident",
+        "hausnummer": 17712660,
+        "ortsname": "velit laboris",
+        "position": {
+          "utm": {
+            "north": 5161499.421731815,
+            "east": -2168418.07622163
+          },
+          "wgs": {
+            "lat": -47561326.93011712,
+            "lon": -73615277.2662409,
+            "geohash": "velit ad et",
+            "fragment": true
+          }
+        },
+        "strasseId": "incididunt officia sed",
+        "strassenname": "officia",
+        "strassennameAbgekuerzt": "ut laborum aut",
+        "strassennameKurz": "ipsum eu",
+        "wirkung": {
+          "status": "AKTIV",
+          "vorgang": "UMNUMMERIERUNG",
+          "wirkungsdatum": "1956-10-06"
+        },
+        "buchstabe": "enim cillum laborum pariatur",
+        "ehemaligeAdresse": "quis",
+        "geozuordnungen": {
+          "baublock": "sint sit",
+          "erhaltungssatzung": "Duis Lorem",
+          "gemarkung": "sed minim veniam occaecat",
+          "grundschule": "sint occaecat sunt non laboris",
+          "kaminkehrerbezirk": "ut nostrud",
+          "mittelschule": "sunt deserunt",
+          "parklizenzgebietId": -72706230,
+          "parklizenzgebietName": "labore Ut tempor ut",
+          "polizeiinspektion": "eu veniam cupidatat mollit",
+          "postleitzahl": "ad proident laborum",
+          "verwaltungszuteilung": {
+            "gemeinde": "pariatur cons",
+            "landesschluessel": "nostrud occaecat amet ",
+            "kreis": "quis ut laboris",
+            "ortsteil": "id sint pariatur",
+            "regierungsbezirk": "veniam id ut quis",
+            "stadtbezirk": "irure Duis Excepteur dolor",
+            "stadtbezirksteil": "non",
+            "stadtbezirksviertel": "Duis magna Ut",
+            "gemeindeschluessel": "adipisicing non enim"
+          },
+          "wahleinteilungen": {
+            "stimmbezirk": 34084370,
+            "stimmkreis": 78982700,
+            "wahlkreis": 23936825,
+            "wahlbezirk": -43056325
+          }
+        }
+      },
+      "distanz": -51118197.34915293
+    },
+    {
+      "adresse": {
+        "adressId": "vo",
+        "adresse": "laborum ad do",
+        "hausnummer": 44372535,
+        "ortsname": "nisi Duis laboris",
+        "position": {
+          "utm": {
+            "north": 47204252.96079421,
+            "east": -46831621.22245297
+          },
+          "wgs": {
+            "lat": -4107070.8893123716,
+            "lon": 84062168.22143531,
+            "geohash": "non cillum reprehenderit in ea",
+            "fragment": false
+          }
+        },
+        "strasseId": "nostrud incididunt aute et",
+        "strassenname": "do sed",
+        "strassennameAbgekuerzt": "qui elit nulla sint",
+        "strassennameKurz": "sed pariatur",
+        "wirkung": {
+          "status": "AKTIV",
+          "vorgang": "NEUERTEILUNG",
+          "wirkungsdatum": "1955-08-05"
+        },
+        "buchstabe": "commodo amet in laborum",
+        "ehemaligeAdresse": "sed dolore",
+        "geozuordnungen": {
+          "baublock": "sed",
+          "erhaltungssatzung": "non adipisicing",
+          "gemarkung": "sint",
+          "grundschule": "aute Excepteur exercitation",
+          "kaminkehrerbezirk": "irure esse ullamco ut",
+          "mittelschule": "fugiat",
+          "parklizenzgebietId": -52672708,
+          "parklizenzgebietName": "veniam enim et aute magna",
+          "polizeiinspektion": "proident minim dolor aliquip",
+          "postleitzahl": "in Lorem consectetur laboris o",
+          "verwaltungszuteilung": {
+            "gemeinde": "dolore",
+            "landesschluessel": "voluptate elit",
+            "kreis": "laboris ullamco",
+            "ortsteil": "culpa irure est nost",
+            "regierungsbezirk": "dolore officia in cupidatat",
+            "stadtbezirk": "dolor sunt",
+            "stadtbezirksteil": "ut eiusmod",
+            "stadtbezirksviertel": "proident culpa",
+            "gemeindeschluessel": "enim irure"
+          },
+          "wahleinteilungen": {
+            "stimmbezirk": 85912569,
+            "stimmkreis": 91004474,
+            "wahlkreis": -68025382,
+            "wahlbezirk": -61788842
+          }
+        }
+      },
+      "distanz": -17973894.71322362
     }
   ]
 }
