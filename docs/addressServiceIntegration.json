@@ -48,20 +48,36 @@
       "value": "",
       "choices": [
         {
-          "name": "Get Person on the basis of an Ordnungsmerkmal",
-          "value": "getPerson"
+          "name": "Searches for addresses Bundesweit",
+          "value": "searchAdressenBundesweit"
         },
         {
-          "name": "Search Person based on search parameters",
-          "value": "searchPerson"
+          "name": "Checks for addresses in Munich",
+          "value": "checkAdresseMuenchen"
         },
         {
-          "name": "Get PersonErweitert on the basis an Ordnungsmerkmal",
-          "value": "getPersonErweitert"
+          "name": "Lists addresses in Munich",
+          "value": "listAdressenMuenchen"
         },
         {
-          "name": "Search PersonErweitert based on search parameters",
-          "value": "searchPersonErweitert"
+          "name": "Lists addresses changes in Munich",
+          "value": "listAenderungenMuenchen"
+        },
+        {
+          "name": "Search for addresses in Munich",
+          "value": "searchAdressenMuenchen"
+        },
+        {
+          "name": "Search for addresses with geo information in Munich",
+          "value": "searchAdressenGeoMuenchen"
+        },
+        {
+          "name": "Finds streets by ID in Munich",
+          "value": "findStrasseByIdMuenchen"
+        },
+        {
+          "name": "Lists streets in Munich",
+          "value": "listStrassenMuenchen"
         }
       ],
       "binding": {
