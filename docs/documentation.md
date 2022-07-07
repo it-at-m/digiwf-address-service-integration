@@ -63,6 +63,10 @@ The response is also an JSON object.
 A crucial and mandatory JSON object attribute for a request is `eventType`.
 This attribute is necessary for correct deserialization of the requests JSON payload within the integration service.
 
+The exact characteristics of the request and response attributes described below can be found at the following link.
+
+https://address-service-test.muenchen.de/swagger-ui/index.html
+
 ##### searchAdressenBundesweit
 
 The following JSON object shows the example payload set at the element templates request field.
