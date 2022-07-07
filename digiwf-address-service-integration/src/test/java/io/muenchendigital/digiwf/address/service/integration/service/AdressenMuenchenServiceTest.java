@@ -9,6 +9,7 @@ import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenA
 import io.muenchendigital.digiwf.address.service.integration.model.request.CheckAdresseMuenchenModel;
 import io.muenchendigital.digiwf.address.service.integration.model.request.ListAdressenMuenchenModel;
 import io.muenchendigital.digiwf.address.service.integration.model.request.ListAenderungenMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.request.SearchAdressenMuenchenModel;
 import io.muenchendigital.digiwf.address.service.integration.repository.AdressenMuenchenRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -194,6 +195,48 @@ class AdressenMuenchenServiceTest {
                 listAenderungenMuenchenModel.getSortdir(),
                 listAenderungenMuenchenModel.getPage(),
                 listAenderungenMuenchenModel.getPagesize()
+        );
+    }
+
+    @Test
+    void searchAdressen() throws AddressServiceIntegrationServerErrorException, AddressServiceIntegrationException, AddressServiceIntegrationClientErrorException {
+        final SearchAdressenMuenchenModel searchAdressenMuenchenModel = new SearchAdressenMuenchenModel();
+        searchAdressenMuenchenModel.setQuery("query");
+        searchAdressenMuenchenModel.setPlzfilter(List.of("plzfilter"));
+        searchAdressenMuenchenModel.setHausnummerfilter(List.of(55L));
+        searchAdressenMuenchenModel.setBuchstabefilter(List.of("buchstabefilter"));
+        searchAdressenMuenchenModel.setSearchtype("searchtype");
+        searchAdressenMuenchenModel.setSort("sort");
+        searchAdressenMuenchenModel.setSortdir("sortdir");
+        searchAdressenMuenchenModel.setPage(67);
+        searchAdressenMuenchenModel.setPagesize(68);
+
+        Mockito.when(this.adressenMuenchenRepository.searchAdressen(
+                searchAdressenMuenchenModel.getQuery(),
+                searchAdressenMuenchenModel.getPlzfilter(),
+                searchAdressenMuenchenModel.getHausnummerfilter(),
+                searchAdressenMuenchenModel.getBuchstabefilter(),
+                searchAdressenMuenchenModel.getSearchtype(),
+                searchAdressenMuenchenModel.getSort(),
+                searchAdressenMuenchenModel.getSortdir(),
+                searchAdressenMuenchenModel.getPage(),
+                searchAdressenMuenchenModel.getPagesize()
+        )).thenReturn(new MuenchenAdresseResponse());
+
+        final MuenchenAdresseResponse result = this.adressenMuenchenService.searchAdressen(searchAdressenMuenchenModel);
+
+        assertThat(result, is(new MuenchenAdresseResponse()));
+
+        Mockito.verify(this.adressenMuenchenRepository, Mockito.times(1)).searchAdressen(
+                searchAdressenMuenchenModel.getQuery(),
+                searchAdressenMuenchenModel.getPlzfilter(),
+                searchAdressenMuenchenModel.getHausnummerfilter(),
+                searchAdressenMuenchenModel.getBuchstabefilter(),
+                searchAdressenMuenchenModel.getSearchtype(),
+                searchAdressenMuenchenModel.getSort(),
+                searchAdressenMuenchenModel.getSortdir(),
+                searchAdressenMuenchenModel.getPage(),
+                searchAdressenMuenchenModel.getPagesize()
         );
     }
 
