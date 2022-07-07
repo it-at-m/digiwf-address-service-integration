@@ -3,10 +3,12 @@ package io.muenchendigital.digiwf.address.service.integration.service;
 import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationClientErrorException;
 import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationException;
 import io.muenchendigital.digiwf.address.service.integration.exception.AddressServiceIntegrationServerErrorException;
+import io.muenchendigital.digiwf.address.service.integration.gen.model.AenderungResponse;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenAdresse;
 import io.muenchendigital.digiwf.address.service.integration.gen.model.MuenchenAdresseResponse;
 import io.muenchendigital.digiwf.address.service.integration.model.request.CheckAdresseMuenchenModel;
 import io.muenchendigital.digiwf.address.service.integration.model.request.ListAdressenMuenchenModel;
+import io.muenchendigital.digiwf.address.service.integration.model.request.ListAenderungenMuenchenModel;
 import io.muenchendigital.digiwf.address.service.integration.repository.AdressenMuenchenRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -149,5 +151,50 @@ class AdressenMuenchenServiceTest {
         );
     }
 
+    @Test
+    void listAenderungen() throws AddressServiceIntegrationServerErrorException, AddressServiceIntegrationException, AddressServiceIntegrationClientErrorException {
+        final ListAenderungenMuenchenModel listAenderungenMuenchenModel = new ListAenderungenMuenchenModel();
+        listAenderungenMuenchenModel.setWirkungsdatumvon("wirkungsdatumvon");
+        listAenderungenMuenchenModel.setWirkungsdatumbis("wirkungsdatumbis");
+        listAenderungenMuenchenModel.setStrassenname("strassenname");
+        listAenderungenMuenchenModel.setHausnummer(77L);
+        listAenderungenMuenchenModel.setPlz("plz");
+        listAenderungenMuenchenModel.setZusatz("zusatz");
+        listAenderungenMuenchenModel.setSort("sort");
+        listAenderungenMuenchenModel.setSortdir("sortdir");
+        listAenderungenMuenchenModel.setPage(87);
+        listAenderungenMuenchenModel.setPagesize(86);
+
+
+        Mockito.when(this.adressenMuenchenRepository.listAenderungen(
+                listAenderungenMuenchenModel.getWirkungsdatumvon(),
+                listAenderungenMuenchenModel.getWirkungsdatumbis(),
+                listAenderungenMuenchenModel.getStrassenname(),
+                listAenderungenMuenchenModel.getHausnummer(),
+                listAenderungenMuenchenModel.getPlz(),
+                listAenderungenMuenchenModel.getZusatz(),
+                listAenderungenMuenchenModel.getSort(),
+                listAenderungenMuenchenModel.getSortdir(),
+                listAenderungenMuenchenModel.getPage(),
+                listAenderungenMuenchenModel.getPagesize()
+        )).thenReturn(new AenderungResponse());
+
+        final AenderungResponse result = this.adressenMuenchenService.listAenderungen(listAenderungenMuenchenModel);
+
+        assertThat(result, is(new AenderungResponse()));
+
+        Mockito.verify(this.adressenMuenchenRepository, Mockito.times(1)).listAenderungen(
+                listAenderungenMuenchenModel.getWirkungsdatumvon(),
+                listAenderungenMuenchenModel.getWirkungsdatumbis(),
+                listAenderungenMuenchenModel.getStrassenname(),
+                listAenderungenMuenchenModel.getHausnummer(),
+                listAenderungenMuenchenModel.getPlz(),
+                listAenderungenMuenchenModel.getZusatz(),
+                listAenderungenMuenchenModel.getSort(),
+                listAenderungenMuenchenModel.getSortdir(),
+                listAenderungenMuenchenModel.getPage(),
+                listAenderungenMuenchenModel.getPagesize()
+        );
+    }
 
 }
