@@ -78,7 +78,6 @@ class AdressenBundesweitServiceTest {
                 model.getPage(),
                 model.getPagesize()
         );
-
     }
 
 }
