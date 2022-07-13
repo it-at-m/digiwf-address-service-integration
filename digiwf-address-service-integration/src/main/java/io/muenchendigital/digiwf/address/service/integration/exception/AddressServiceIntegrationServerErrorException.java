@@ -1,0 +1,9 @@
+package io.muenchendigital.digiwf.address.service.integration.exception;
+
+public class AddressServiceIntegrationServerErrorException extends Exception {
+
+    public AddressServiceIntegrationServerErrorException(final String message, final Exception exception) {
+        super(message, exception);
+    }
+
+}
