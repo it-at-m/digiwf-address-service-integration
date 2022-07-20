@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.muenchendigital.digiwf</groupId>
     <artifactId>digiwf-address-service-integration-parent</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <name>digiwf-address-service-integration-parent</name>
     <packaging>pom</packaging>
     <description>Address service integration used by DigiWF</description>
