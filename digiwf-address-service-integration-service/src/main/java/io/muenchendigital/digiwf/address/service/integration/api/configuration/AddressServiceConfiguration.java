@@ -16,13 +16,22 @@ import java.util.Map;
 @AutoConfigureBefore({StreamingConfiguration.class})
 public class AddressServiceConfiguration {
 
-    private static final String HEADER_GET_PERSON = "getPerson";
+    private static final String HEADER_SEARCH_ADRESSEN_BUNDESWEIT = "searchAdressenBundesweit";
 
-    private static final String HEADER_SEARCH_PERSON = "searchPerson";
+    private static final String HEADER_CHECK_ADRESSE_MUENCHEN = "checkAdresseMuenchen";
 
-    private static final String HEADER_GET_PERSON_ERWEITERT = "getPersonErweitert";
+    private static final String HEADER_LIST_ADRESSEN_MUENCHEN = "listAdressenMuenchen";
 
-    private static final String HEADER_SEARCH_PERSON_ERWEITERT = "searchPersonErweitert";
+    private static final String HEADER_LIST_AENDERUNGEN_MUENCHEN = "listAenderungenMuenchen";
+
+    private static final String HEADER_SEARCH_ADRESSEN_MUENCHEN = "searchAdressenMuenchen";
+
+    private static final String HEADER_SEARCH_ADRESSEN_GEO_MUENCHEN = "searchAdressenGeoMuenchen";
+
+    private static final String HEADER_FIND_STRASSE_BY_ID_MUENCHEN = "findStrasseByIdMuenchen";
+
+    private static final String HEADER_LIST_STRASSE_MUENCHEN = "listStrassenMuenchen";
+
 
     /**
      * Bean of type {@link RoutingCallback} to register the routes
@@ -34,10 +43,14 @@ public class AddressServiceConfiguration {
     @ConditionalOnMissingBean
     public MessageRoutingCallback okEwoRouter() {
         final Map<String, String> typeMappings = new HashMap<>();
-        typeMappings.put(HEADER_GET_PERSON, HEADER_GET_PERSON);
-        typeMappings.put(HEADER_SEARCH_PERSON, HEADER_SEARCH_PERSON);
-        typeMappings.put(HEADER_GET_PERSON_ERWEITERT, HEADER_GET_PERSON_ERWEITERT);
-        typeMappings.put(HEADER_SEARCH_PERSON_ERWEITERT, HEADER_SEARCH_PERSON_ERWEITERT);
+        typeMappings.put(HEADER_SEARCH_ADRESSEN_BUNDESWEIT, HEADER_SEARCH_ADRESSEN_BUNDESWEIT);
+        typeMappings.put(HEADER_CHECK_ADRESSE_MUENCHEN, HEADER_CHECK_ADRESSE_MUENCHEN);
+        typeMappings.put(HEADER_LIST_ADRESSEN_MUENCHEN, HEADER_LIST_ADRESSEN_MUENCHEN);
+        typeMappings.put(HEADER_LIST_AENDERUNGEN_MUENCHEN, HEADER_LIST_AENDERUNGEN_MUENCHEN);
+        typeMappings.put(HEADER_SEARCH_ADRESSEN_MUENCHEN, HEADER_SEARCH_ADRESSEN_MUENCHEN);
+        typeMappings.put(HEADER_SEARCH_ADRESSEN_GEO_MUENCHEN, HEADER_SEARCH_ADRESSEN_GEO_MUENCHEN);
+        typeMappings.put(HEADER_FIND_STRASSE_BY_ID_MUENCHEN, HEADER_FIND_STRASSE_BY_ID_MUENCHEN);
+        typeMappings.put(HEADER_LIST_STRASSE_MUENCHEN, HEADER_LIST_STRASSE_MUENCHEN);
         return new RoutingCallback(typeMappings);
     }
 
