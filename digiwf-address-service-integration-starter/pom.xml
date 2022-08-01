@@ -30,6 +30,7 @@
             <version>${spring.boot.version}</version>
             <optional>true</optional>
         </dependency>
+        <!--    httpclient version needs to be set for german Umlauts to be encoded-->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
