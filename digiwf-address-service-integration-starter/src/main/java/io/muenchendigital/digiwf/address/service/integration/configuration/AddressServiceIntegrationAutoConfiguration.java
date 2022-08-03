@@ -12,10 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
-import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
-
-import java.nio.charset.StandardCharsets;
 
 
 @Configuration
@@ -51,11 +48,10 @@ public class AddressServiceIntegrationAutoConfiguration {
      * @return a configured {@link ApiClient}.
      */
     public ApiClient addressServiceApiClient(final RestTemplateBuilder restTemplateBuilder) {
+
         final RestTemplate restTemplate = restTemplateBuilder
                 .build();
-        // This needs to be set for german Umlauts to be encoded
-        restTemplate.getMessageConverters()
-                .add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
+
         final ApiClient apiClient = new ApiClient(restTemplate);
         apiClient.setBasePath(this.addressServiceIntegrationProperties.getUrl());
         return apiClient;

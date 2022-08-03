@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.muenchendigital.digiwf</groupId>
     <artifactId>digiwf-address-service-integration-parent</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
     <name>digiwf-address-service-integration-parent</name>
     <packaging>pom</packaging>
     <description>Address service integration used by DigiWF</description>
@@ -25,6 +25,7 @@
         <maven.surfire.plugin.version>2.22.2</maven.surfire.plugin.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <digiwf.spring.cloudstream.utils.version>0.0.1</digiwf.spring.cloudstream.utils.version>
+        <httpclient.version>4.5.13</httpclient.version>
     </properties>
 
     <modules>
